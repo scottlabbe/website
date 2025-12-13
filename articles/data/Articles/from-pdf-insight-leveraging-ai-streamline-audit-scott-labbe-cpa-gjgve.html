@@ -1,0 +1,147 @@
+<html>
+<head>
+  <title>From PDF to Insight: Leveraging AI to Streamline Audit Report Processing</title>
+  <style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+</head>
+<body>
+    <img src="https://media.licdn.com/mediaD4E12AQFuPUoomMUVug" alt="" title="" />
+      <h1><a href="https://www.linkedin.com/pulse/from-pdf-insight-leveraging-ai-streamline-audit-scott-labbe-cpa-gjgve">From PDF to Insight: Leveraging AI to Streamline Audit Report Processing</a></h1>
+    <p class="created">Created on 2024-10-10 21:28</p>
+  <p class="published">Published on 2024-10-11 12:51</p>
+  <div><p>Today, I'm introducing a very simple application to demonstrate one way AI tools can speed up and enhance existing workflows. This tool accepts PDF files of audit reports and uses AI tools like OpenAI's GPT-4o-mini or Claude Sonnet 3.5 to do two things: 1) extract consistent, useful information from the audit report to create a structured summary, and 2) build on the audit results to suggest potential future work based on the summary. You can also download the results to a .txt file. </p><p>I built this application last week to show a few impressive capabilities that I believe will be important to consider when applying AI tools to workflows. The link is at the end of the post if you want to try it out.</p><p>For context, I've been a legislative auditor in the past, and it was common for our staff to review and summarize every single internal audit report published by a government agency, university, or even certain contractors. The goal was to read through the audit report, record information about the audit objectives and findings, and then determine if there were significant issues that indicated we (the legislative auditor) should perform additional work on the program or agency.</p><p>Basically, the task was to review audit reports, summarize the relevant parts, and use judgment to decide if the report should be used in planning future audits. In the manual process, the quality of summarizing, identifying significant issues, and generating potential new audits varied depending on the experience level of the auditors performing the task. An experienced auditor with a broad range of experience could do a great job. But for a new person assigned to this role, it was often hit or miss whether they could identify useful information to include in our process.</p><p>The goal of this tool is to show that a process that was done manually with inconsistent results can be redesigned using AI tools to be performed quickly, consistently, reliably, and customized as needed to plug into downstream processes.</p><p>The first notable capability I'm demonstrating with this tool is using AI tools to extract consistent, structured information from unstructured text data that can be stored or used in additional workflows.</p><p>Structured data, like tables in spreadsheets, is easy to manipulate, summarize, or extract for whatever task is at hand. Unstructured data, like text in PDF audit reports, is much harder to work with in existing workflows. PDFs often contain customized formatting, styles, graphs, figures, and tables that are not easily extracted by most automation tools. Audit reports have consistent types of information included in the text but where and how that information is presented can be different for each organization publishing audit reports.</p><p>The second capability is using the AI-extracted summary to suggest additional audit ideas for the future audit plans. With this step, we leverage the extracted summary and the AI tool's general knowledge to generate new audit ideas based on the summary.</p><p>Hopefully, you'll get the chance to try the tool. I wanted to show a simple example of how AI tools can enhance existing workflows by speeding them up, outputting consistent results, and building on the output to generate actionable ideas for humans to use. I would love to hear your thoughts if you try it out. If you have any questions about how it works or how I used Replit to create the tool, let me know!</p><p><a href="https://auditanalyzer.replit.app/" target="_blank">https://auditanalyzer.replit.app/</a></p><p>Note: This tool was designed to be used with publicly available audit reports. I am not saving any pdfs or queries used with this tool, however, the text from PDFs is sent to OpenAI and Claude for analysis and the output is logged by Replit, the tool I used to build the app.</p><div><iframe allowfullscreen="true" frameborder="0" height="405" src="https://www.linkedin.com/embeds/publishingEmbed.html?articleId=9066398544064942811" width="720"></iframe></div><p></p></div>
+</body>
+</html>

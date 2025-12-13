@@ -1,0 +1,147 @@
+<html>
+<head>
+  <title>PDFs are Complicated: Making Documents Work with AI Tools </title>
+  <style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+</head>
+<body>
+    <img src="https://media.licdn.com/mediaD4E12AQFQjwrbgzldHA" alt="" title="" />
+      <h1><a href="https://www.linkedin.com/pulse/pdfs-complicated-making-documents-work-ai-tools-scott-labbe-cpa-djkqe">PDFs are Complicated: Making Documents Work with AI Tools </a></h1>
+    <p class="created">Created on 2025-01-31 03:36</p>
+  <p class="published">Published on 2025-02-05 03:45</p>
+  <div><p>PDFs are everywhere, in auditing or government administration roles, we frequently analyze documents like reports, contracts, and legislative briefs delivered as PDFs. When you start using AI tools, like Large Language Models (LLMs) on those documents, the varied formatting present in documents can cause misleading interpretations or outright errors in the output.</p><p>These errors can lead overall distrust in the models and apprehension about integrating AI tools into workflows. AI tools based on LLMs are text prediction models and they can’t tell the difference between the body of a text and graphic elements like text boxes and other elements that provide context for human readers. It’s worth understanding how PDFs and AI tools interact with each other.</p><h3>PDFs Are Visual by Design</h3><ul><li><p><strong>Meant for Humans, Not AI Tools:</strong> PDFs emphasize visual appearance. This makes them great for consistent viewing across devices or sharing widely with audiences like the public or the wider organization, but less ideal for accurate AI analysis.</p></li><li><p><strong>Complex Layouts:</strong> PDFs contain multi-column text, embedded images, tables, headers, footers, and many of these elements are arranged with the purpose of be visually appealing. AI models struggle with parsing visual elements and need logical text structures to understand how sections relate to other sections.</p></li><li><p><strong>Scanned Documents:</strong> Some PDFs are literally images of text like scanned documents. Even with OCR, the accuracy of converting those document images into actual text depends on the quality of the scan.</p></li></ul><h3>Why Converting PDFs Matters</h3><p>When we begin to think about using PDFs in workflows that include AI tools, we have to consider the best way to convert PDFs into a format that is more friendly to use with AI interfaces. Learning about this conversion can allow us to be mindful of the areas that AI tools might struggle to utilize our data in ways that are helpful and reliable.</p><p>In fact, many people use ChatGPT to interact with their documents without realizing there’s a hidden conversion happening in the background. Although the model conceals this process, before AI can read your PDF, the text must be extracted in a way that preserves its logical structure so the tool can interpret it accurately.</p><h3>Markdown as an Example</h3><p>One popular format for pairing with AI tools is Markdown, it’s a simple, readable text format where styling is indicated with symbols (like * for italics). Instead of unseen formatting code (as in Word), Markdown lays out structure right in the text. This makes it easier for AI to grasp the true content, rather than wrestling with PDF’s invisible layout coordinates. </p><h3>Examples of a Markdown Conversion</h3><p>Here are some examples of what you can expect to see when you convert a PDF to something like markdown content. I ran a quick experiment to convert a pdf that includes a lot of design, formatting, tables, and graphics with a python package called PyMuPDF to see if anything was lost in the conversion of a pdf file to a more AI friendly format. </p><p>Overall the quality was better than I was expecting, it correctly identified text boxes vs paragraphs, copied structured tables accurately, and was able to emphasize the passages emphasized in the actual report. It completely ignored the complicated graphics we spent days designing and had mixed success recreating tables in the report. </p><p>Here's the pdf report.</p><h3>Logical Order - Page 2</h3><p>Here's a comparison of the beginning of the report where it appropriately recorded the overall conclusion and background information describing some of the context and key terms in logical order. </p><p><strong>Report:</strong></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D5612AQF35VQQqMiaHw" src="https://media.licdn.com/dms/image/v2/D5612AQF35VQQqMiaHw/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1738296673456?e=1745452800&amp;v=beta&amp;t=lz2wXjkIX3iMu7AySDy39Vl-NmezLYlmbU23tDxOjM0"><figcaption></figcaption></figure><p><strong>Converted Markdown File:</strong></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D5612AQHEg3MrGAxjnw" src="https://media.licdn.com/dms/image/v2/D5612AQHEg3MrGAxjnw/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1738296710985?e=1745452800&amp;v=beta&amp;t=TFdiruDh7Ml7HIrb-fv7xN8WS1zZ0iZpWFIqos3sG6g"><figcaption></figcaption></figure><h3>Graphics - Page 8  </h3><p>Heavily customized graphics created to explain a process or flow of data were completely omitted from the markdown file. </p><p><strong>Report:</strong></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D5612AQH-Fw-_az6lnQ" src="https://media.licdn.com/dms/image/v2/D5612AQH-Fw-_az6lnQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1738294614727?e=1745452800&amp;v=beta&amp;t=1bSED7rF0m5FAfCJmR5ynHWZK71WnPAsimiJavZDNfs"><figcaption></figcaption></figure><p><strong>Converted Markdown File:</strong></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D5612AQFERmaB3eDinQ" src="https://media.licdn.com/dms/image/v2/D5612AQFERmaB3eDinQ/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1738294672722?e=1745452800&amp;v=beta&amp;t=4FsAnvEm6SSWRPXs7dgX4UXAuMI-444WErgSnAFhVao"><figcaption></figcaption></figure><h3>Tables - Pages 25-26</h3><p>Here's some examples where the tables were recreated both accurately and inaccurately. The only significant difference I see between the two tables is that the inaccurate example contained multiple bulleted lists within a table. This is a great example of how LLMs could easily miss or misunderstand facts in your PDF and respond with poor or inaccurate responses simply because the model was fed messy data. </p><h3>Accurate Conversion</h3><p><strong>Report:</strong></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQFgnmVa3Nn3hw" src="https://media.licdn.com/dms/image/v2/D4E12AQFgnmVa3Nn3hw/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1738721532032?e=1745452800&amp;v=beta&amp;t=WGO4ok9pj8MlwAQ34vaidKGUeha-v7LSSxELq3XsrfM"><figcaption></figcaption></figure><p><strong>Converted Markdown File:</strong></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQHygjgGza2Axw" src="https://media.licdn.com/dms/image/v2/D4E12AQHygjgGza2Axw/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1738721572215?e=1745452800&amp;v=beta&amp;t=o-FR3q8zHaKo2vmmnVSKmsTvEomtkGPD5nDuYl05mdQ"><figcaption></figcaption></figure><h3>Inaccurate Conversion</h3><p><strong>Report:</strong></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQEgHE0QTzPveg" src="https://media.licdn.com/dms/image/v2/D4E12AQEgHE0QTzPveg/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1738722196078?e=1745452800&amp;v=beta&amp;t=-6wPpSOj0oY9etiI36QSQ__65fcsNcTHeIn8oxsbBtw"><figcaption></figcaption></figure><p><strong>Converted Markdown File:</strong></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQHqP8AWGfxTGw" src="https://media.licdn.com/dms/image/v2/D4E12AQHqP8AWGfxTGw/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1738722208884?e=1745452800&amp;v=beta&amp;t=vdlWIa_J1duA0vW_WoXljAR97mAizRYG6q-G7FpePao"><figcaption></figcaption></figure><h3>Conclusion</h3><p>When integrating AI into PDF workflows, understanding how different formatting can impact interpretation of information is essential. Converting PDFs into structured, AI-friendly formats like Markdown is an important step in using AI tools to put your data to work. However, recognizing the limitations, such as missing graphics or misinterpreted table structures, remains crucial for avoiding inaccurate outputs and improving reliability using AI tools in real-life workflows.</p></div>
+</body>
+</html>

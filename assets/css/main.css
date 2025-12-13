@@ -1,0 +1,249 @@
+:root {
+  --bg-color: #FDF5E6;       /* Warm Cream */
+  --text-color: #333333;     /* Soft Charcoal */
+  --accent-color: #2D5D4B;   /* Hunter Green (Sharp, distinct) */
+  --highlight-color: #E8E4D5; /* Darker cream for hovers */
+  --font-body: 'Libre Baskerville', serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+/* --- Typography --- */
+
+h1, h2, h3 {
+  font-family: var(--font-mono); /* Technical look for headers */
+  color: var(--text-color);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 3rem;
+  display: block;
+}
+
+/* --- Header & Navigation --- */
+
+header {
+  margin-bottom: 3rem;
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+/* --- The Interactive Sentences --- */
+
+.section-text {
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem 0;
+}
+
+/* The words you hover over (e.g., "building") */
+.trigger-word {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-color);
+  cursor: pointer;
+  border-bottom: 2px dotted var(--accent-color); /* Subtle cue */
+  transition: background-color 0.2s;
+}
+
+.trigger-word:hover {
+  background-color: var(--highlight-color);
+}
+
+/* --- The Revealed Links (The "Card" look) --- */
+
+.project-list {
+  list-style: none; /* Remove default bullets */
+  padding-left: 0;
+  margin: 1rem 0 2rem 1.5rem;
+  
+  /* The "Card" Look: A vertical line instead of a box */
+  border-left: 3px solid var(--accent-color); 
+  padding-left: 1.5rem;
+}
+
+.project-list li {
+  margin-bottom: 0.8rem;
+}
+
+.project-list a {
+  font-family: var(--font-mono); /* Links look like code/data */
+  font-size: 0.95rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 400;
+  transition: text-decoration 0.2s;
+}
+
+.project-list a:hover {
+  text-decoration: underline;
+}
+
+/* --- Content blocks --- */
+
+.content-block {
+  margin-bottom: 3rem;
+}
+
+/* --- Reveal animation --- */
+
+.reveal-links {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Show links on hover anywhere in the block */
+.reveal-block:hover .reveal-links {
+  display: block;
+}
+
+/* Also show links when toggled open (for mobile + keyboard) */
+.reveal-block.open .reveal-links {
+  display: block;
+}
+
+.reveal-links {
+  display: none;
+}
+
+/* --- Small text (articles dates, footer) --- */
+
+.small {
+  font-size: 0.9rem;
+  color: #666;
+  font-family: var(--font-mono);
+}
+
+/* --- Footer --- */
+
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ddd;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* --- Articles Page --- */
+
+main h1 {
+  margin-bottom: 1rem;
+}
+
+ul[style*="list-style:none"] {
+  list-style: none;
+  padding: 0;
+}
+
+ul[style*="list-style:none"] li {
+  margin: 1.2rem 0;
+}
+
+ul[style*="list-style:none"] a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  transition: text-decoration 0.2s;
+}
+
+ul[style*="list-style:none"] a:hover {
+  text-decoration: underline;
+}
+
+/* --- Links --- */
+
+a {
+  color: var(--accent-color);
+}
+
+a:visited {
+  color: #6b4e8c;
+}
+
+/* --- Reduce motion preference --- */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+    animation: none !important;
+  }
+}
+
+/* --- Mobile comfort --- */
+
+@media (max-width: 640px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .section-text {
+    font-size: 0.9rem;
+  }
+  
+  .subtitle {
+    margin-bottom: 2rem;
+  }
+}

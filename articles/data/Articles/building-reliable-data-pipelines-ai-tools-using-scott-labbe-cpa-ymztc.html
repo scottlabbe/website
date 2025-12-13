@@ -1,0 +1,147 @@
+<html>
+<head>
+  <title>Building Reliable Data Pipelines with AI Tools: Using Python and Pydantic to Validate AI Document Extraction</title>
+  <style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+</head>
+<body>
+    <img src="https://media.licdn.com/mediaD4E12AQGVhVQr-J6LSA" alt="" title="" />
+      <h1><a href="https://www.linkedin.com/pulse/building-reliable-data-pipelines-ai-tools-using-scott-labbe-cpa-ymztc">Building Reliable Data Pipelines with AI Tools: Using Python and Pydantic to Validate AI Document Extraction</a></h1>
+    <p class="created">Created on 2025-01-26 22:41</p>
+  <p class="published">Published on 2025-01-31 02:57</p>
+  <div><p>One of the first things businesses are understanding is AI is a very useful tool to pull their relevant data out of all those messy documents and files they're drowning in. Think PDFs, invoices, contracts, spreadsheets, you name it. They want to understand their data and use it in their day-to-day operations.</p><p>AI tools are very powerful for analyzing texts with skills that we might think of as reading, understanding, and recording information. The problem is that AI tools will make mistakes and when they make mistakes, they have the tendency to compound those errors as they complete their responses.</p><p>In a lot of real-world applications, these are tasks might be delegated to less experienced staff but they're important steps in processes where accuracy is important. For example:</p><ul><li><p>An intern reading documents and preparing summaries or reports to support or plug into other workflows.</p></li><li><p>Maybe a staff tax accountant needs to read dozens of pages of financial documents to record a few key numbers and details about a certain transaction to make accurate entries.</p></li><li><p>Maybe you need the data from hundreds of images or pdfs in a structured format to analyze with Excel.</p></li><li><p>Or you want to have a centralized source of information about contract terms and requirements.</p></li></ul><p>But we all know interns and staff-level folks aren’t always 100% accurate, the same is true for AI tools.</p><p><strong>Using Python and Pydantic to Control AI Output. </strong>This is where knowing a bit of python and the packages available in python can really help control the output from AI tools. Specifically, Pydantic, a python package with extremely useful capabilities, turned messy receipt images into a perfectly formatted data table of receipt data along with notes about validation errors.  </p><p>That’s the reality people will face when trying to integrate AI into their existing workflows. If you want useful, consistent, and structured data from inconsistently formatted documents, you’ll need a way to make sure data provided by an AI tool matches your expectations of format and quality.</p><p>How does Pydantic help? You can see my code at the bottom of the article, but I used Pydantic to define a “Receipt” model—basically a blueprint that spells out what data fields and data types we expect (items, subtotal, taxes, etc.) from the AI extraction. When an AI tool extracts data from an image or PDF, Pydantic checks every field in the model to see if it matches our field definitions.</p><p>Here’s the data table of the summary receipt data created after using GPT-4o to extract fields from my Receipt model. Green cells were accurate according to my review and the red cells were errors. </p><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQGV6gyZYyDo8Q" src="https://media.licdn.com/dms/image/v2/D4E12AQGV6gyZYyDo8Q/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1737931427865?e=1745452800&amp;v=beta&amp;t=WKL11rs3YH6azHReQT8ti91y_KzmNIhKmyNg2rCuNao"><figcaption></figcaption></figure><p>It’s important to say that just because Pydantic validates the type of data extracted by AI tools, it doesn’t mean you’re going to get 100% accurate data. The red cells in the screenshot show some extraction errors I identified. However, the package also allows you to perform a kind of validation that triggers according to criteria you can set.</p><p>For example, you can notice a ‘validation_error’ column in the screenshot that populated according to validation logic I added to the process. In my code below, there’s a ‘model_validator’ that adds up amounts extracted for subtotal, tax, fees, and discount to compare the total to what was extracted as the grand_total by the model.</p><p>If the amounts don’t agree, it attaches a note to the record to show what was expected and what was calculated. This is a streamlined way to identify records that need to be reviewed and corrected with a customize note about the issue.</p><p><strong>Why should anyone care?</strong> Pydantic ensures that as soon as new extracted data arrives from an AI tool, it’s checked against whatever standards you know should apply to that data. The main advantage of this kind of logic is that any anomalies pop up right away. It can focus manual reviews by flagging possible errors and gives a dependable structure for integrating data into spreadsheets or other data processes later on.</p><p>Here’s the code from the Pydantic model that ensures we get the data types and validation we need. </p><pre></pre><p>Here’s a link to the full code used for the receipt extraction: <a href="https://github.com/scottlabbe/GPT-4o_receipt_extraction" target="_blank">https://github.com/scottlabbe/GPT-4o_receipt_extraction</a></p></div>
+</body>
+</html>

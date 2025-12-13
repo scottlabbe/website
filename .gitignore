@@ -1,0 +1,76 @@
+# --- OS / misc ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# --- Logs ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Node (only if you later add tooling) ---
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.venv/
+venv/
+ENV/
+env/
+
+# --- Local tooling / temp ---
+.tmp/
+tmp/
+.temp/
+temp/
+*.tmp
+
+# --- Local dev server / output ---
+# (Keep your real 'assets/', 'articles/', etc. tracked)
+*.pid
+
+# --- Secrets (never commit) ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# --- Archives / exports ---
+*.zip
+*.tar.gz
+*.tgz
+
+# --- Mac-specific local metadata ---
+.AppleDouble
+.LSOverride

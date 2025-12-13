@@ -1,0 +1,147 @@
+<html>
+<head>
+  <title>Experimenting with GPT-4o’s Image Extraction Capabilities: An Assessment of AI Accuracy on Receipt Images</title>
+  <style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+</head>
+<body>
+    <img src="https://media.licdn.com/mediaD4E12AQFV06Cs3tWVdw" alt="" title="" />
+      <h1><a href="https://www.linkedin.com/pulse/experimenting-gpt-4os-image-extraction-capabilities-ai-labbe-cpa-82ede">Experimenting with GPT-4o’s Image Extraction Capabilities: An Assessment of AI Accuracy on Receipt Images</a></h1>
+    <p class="created">Created on 2024-12-30 14:56</p>
+  <p class="published">Published on 2024-12-30 16:32</p>
+  <div><p>I conducted an experiment to gauge how well GPT-4o can read and extract information from 20 JPEG images of receipts. These receipts vary in complexity: some include only one item, while others contain 15–20 items.</p><p>I focused on extracting two categories of data:</p><ol><li><p><strong>Summary Attributes</strong> (occur once per receipt): store name, purchase date, total price, tax, payment method, etc.</p></li><li><p><strong>Item Details</strong> (occur multiple times per receipt): item names, prices, and quantities.</p></li></ol><p>The model performed best on summary data (like store name, date, and payment method) and struggled more with detailed item information (especially prices and totals).</p><h3>Results - Receipt Summary </h3><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQFxuuTBtrhUFA" src="https://media.licdn.com/dms/image/v2/D4E12AQFxuuTBtrhUFA/article-inline_image-shrink_400_744/article-inline_image-shrink_400_744/0/1735572432788?e=1745452800&amp;v=beta&amp;t=x3XU48AajCliS2OxFl0Zp8fFLYQ_Jc8mNNy5RnSCrH0"><figcaption></figcaption></figure><h3>Results - Item Details</h3><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQFkaTq3dBdKng" src="https://media.licdn.com/dms/image/v2/D4E12AQFkaTq3dBdKng/article-inline_image-shrink_400_744/article-inline_image-shrink_400_744/0/1735572451414?e=1745452800&amp;v=beta&amp;t=ymR_L1zcT_o565tnV_X-U5xLd7j72yPl5Qbie42HKoM"><figcaption></figcaption></figure><p>Here are some observations I made from a few times running the images through GPT-4o.</p><h3>Data Quality is Most Important</h3><p>Data quality proved to be the most critical factor in successful extraction. Dark images, wrinkled receipts, and paper folds significantly impacted accuracy. This was especially noticeable with angled receipts, where the spatial relationship between item names, quantities, and prices became distorted, making it difficult for the model to correctly match values across rows. </p><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQFfTZtp1-946Q" src="https://media.licdn.com/dms/image/v2/D4E12AQFfTZtp1-946Q/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1735573433023?e=1745452800&amp;v=beta&amp;t=UFzMC8xQzQhlgcDz2yQ460nunsyQq3B5yLBhgOVQ480"><figcaption>While the item names were 100% accurate for this receipt, the extraction failed on almost every item amount, quantity, and item total for this receipt. </figcaption></figure><h3>Summary Data was more Successful </h3><p>The receipt summary data (store name, payment method, date) consistently achieved higher accuracy than the detailed line items. This aligns with how large language models like GPT-4o fundamentally work, they excel at recognizing patterns in text and understanding context, which is perfect for identifying store names or payment methods that follow predictable formats. For example, store name is almost always at the top of the receipt, similarly, dates, totals, and payment methods are consistently at the bottom of the receipts. There's no need to track items across lines of the receipts for extraction tasks like this. </p><h3>Unexpected Accuracy in Numerical Understanding</h3><p>Despite the model's general struggles with detailed numerical data, it demonstrated an unexpected ability to integrate multiple tax amounts into a single, accurate total. For example, when presented with separate lines for different kinds of taxes, the model didn't just extract these as individual items but intelligently combined them into a single, correct tax amount.</p><p>This capability shows that while the model may struggle with line-by-line price extraction, it has a decent understanding of how different components relate to each other in the context of a receipt's overall structure. I thought it was interesting to consider this strength in working with numbers in contrast to its challenges with individual line item prices and quantities discussed above. </p><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQHaKlxL7flKOg" src="https://media.licdn.com/dms/image/v2/D4E12AQHaKlxL7flKOg/article-inline_image-shrink_400_744/article-inline_image-shrink_400_744/0/1735574834227?e=1745452800&amp;v=beta&amp;t=AE0mUzxMOo9pRznTqREJXlF4DsiPoR94k-vJOQeaE1M"><figcaption>The model successfully returned a total tax of $1.45 for this receipt. </figcaption></figure><h3>Background</h3><p>I ran the images through a python program I created that uses the GPT-4o API to extract the details from the images. The program uses pydantic python package to validate the data output by the model, this ensures numbers, dates, and text are correctly formatted. I downloaded the receipt images from Kaggle and I did not resize or adjust the images at all before the extraction. (<a href="https://www.kaggle.com/datasets/trainingdatapro/ocr-receipts-text-detection" target="_blank">https://www.kaggle.com/datasets/trainingdatapro/ocr-receipts-text-detection</a>)</p><p>#ArtificialIntelligence #AI #GPT4 #DataExtraction #ComputerVision #AIExperiments #AIAutomation #DataScience</p></div>
+</body>
+</html>

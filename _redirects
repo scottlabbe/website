@@ -1,0 +1,4 @@
+# Redirects for Cloudflare Pages
+/about    /   301
+/about/   /   301
+/index.html /  301
