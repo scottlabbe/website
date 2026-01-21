@@ -1,0 +1,181 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>From Manual to Automatic: How AI and Python Can Automate Spreadsheet Data Extraction</title>
+    <link rel="canonical" href="https://scottlabbe.me/articles/from-manual-to-automatic/" />
+<style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    /* Override article styles to match site design */
+    body {
+      background-color: #FDF5E6;
+      color: #333333;
+      font-family: 'Libre Baskerville', serif;
+      max-width: 800px !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      padding: 4rem 2rem !important;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Mono', monospace;
+      color: #333333;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    h1 { font-size: 2rem; margin: 1.5rem 0 0.8rem 0; }
+    h2 { font-size: 1.4rem; margin: 1.2rem 0 0.6rem 0; }
+    h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem 0; }
+    p { margin: 0 0 1rem 0; }
+    a { color: #2D5D4B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { margin: 0.9rem 0; padding-left: 1.5rem; }
+    li { margin: 0.3rem 0; line-height: 1.7; }
+  </style>
+  </head>
+<body>
+    <img src="https://media.licdn.com/mediaD4E12AQEswDfeRhaWzA" alt="" title="" />
+      <h1><a href="https://www.linkedin.com/pulse/from-manual-automatic-how-ai-python-can-automate-data-labbe-cpa-gogic">From Manual to Automatic: How AI and Python Can Automate Spreadsheet Data Extraction</a></h1>
+    <p class="created">Created on 2024-11-05 18:30</p>
+  <p class="published">Published on 2024-11-06 14:42</p>
+  <div><p>In the world of finance and auditing, efficiency and accuracy are paramount. Traditional methods of data compilation—especially when dealing with numerous spreadsheets—are not only time-consuming but also prone to human error. However, with the advent of AI tools like ChatGPT and Python's Jupyter Notebooks, handling complex data extraction, transformation, and compilation has never been easier. </p><p>In case you're unfamiliar, Jupyter Notebooks are interactive documents that combine live code, visualizations, and narrative text in one place. They allow you to write and run code in small, manageable chunks while documenting your process, making them great for both development and sharing your work. </p><p><strong>The Challenge of Manual Data Compilation</strong></p><p>In my experience as a legislative auditor, compiling data from multiple spreadsheets was a labor-intensive task that could take days to complete. Whether it was income statement data from various districts, staffing records from different contractors, or operational data about program participants, the process involved endless copying and pasting. This method was not only inefficient but also increased the risk of errors that could compromise the integrity of the analysis and add days or weeks to project timelines. </p><p><strong>Introducing AI-Powered Automation</strong></p><p>One of my favorite examples of leveraging AI for automation involves using ChatGPT in conjunction with Python and Jupyter Notebooks. While Python programming might seem daunting to many finance and auditing professionals, AI tools have made it significantly more accessible. The initial learning curve is surmountable, especially with AI led step-by-step assistance tailored to any learning level.</p><p>Importantly, while ChatGPT created the code, this approach processes all data locally on your computer—meaning your sensitive financial or personal information never leaves your system, maintaining complete data security. </p><p><strong>A Practical Example: Compiling Templates into One Dataset</strong></p><p>In the video below, I start with a folder of template-based spreadsheets with information about districts, names, positions, and salaries and compile all the data into one data table for further analysis. The python code is written by ChatGPT and it's running in a Jupyter notebook. </p><p>This Python code reads each spreadsheet in the folder, extracts the specified data from multiple tabs, and compiles it into a single dataset according to my preferences. The result is a neatly organized dataset exported to a file I can use in whatever way is needed. </p><p><strong>Prompt Overview</strong></p><p>Here's the exact prompt I used to create this code with ChatGPT with some other options to suit different needs. </p><p>'''The overall goal is to create a python jupyter notebook to {extract, compile, analyze, graph…} data from a {table, spreadsheet, folder of spreadsheets…} to one table of data in a spreadsheet.</p><p>Tab Name: 'Input Data' - The first few rows are blank. I want the row headers in A4 and A5 to be column headers in the output dataset. I want the values in B4 and B5 to repeat for as many rows are in the 'Salaries' tab.</p><p>Tab Name: 'Salaries' - I want the headers in A3:F3 to be the next columns in the resulting dataset. The data begins in A4:F4 but each spreadsheet has a different number of rows to extract. There are blank cells at the end of the data.</p><p>Here's the folder location: path\to\data</p><p>Name the resulting file in the same location: Program_Salaries.xlsx'''</p><p><strong>Final Thoughts</strong></p><p>What once took days now happens in a matter of seconds. The automation not only saves time but also enhances accuracy by minimizing human error. The streamlined process allows professionals to focus on analysis and decision-making rather than mundane data handling.</p><p>Integrating AI into your business processes doesn't mean overhauling everything or compromising data security by sending your data to AI black boxes. It's about leveraging AI as a tool to help you discover simpler, more efficient ways to work. The initial investment in learning and adopting these tools is well worth the effort, allowing new levels of productivity while keeping your operations streamlined and secure.</p><p>Here's a link to the actual data and notebook if you want to try it for yourself. </p><p><a href="https://github.com/scottlabbe/excel_extract_salaries/tree/main" target="_blank">https://github.com/scottlabbe/excel_extract_salaries/tree/main</a></p><div><iframe allowfullscreen="true" frameborder="0" height="405" src="https://www.linkedin.com/embeds/publishingEmbed.html?articleId=7420036026310805326" width="720"></iframe></div><p></p></div>
+</body>
+</html>

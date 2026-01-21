@@ -1,0 +1,181 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Validate, Review, Reimburse: Automating Desk Reviews with AI Coding Agents (Part 2)</title>
+    <link rel="canonical" href="https://scottlabbe.me/articles/validate-review-reimburse/" />
+<style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    /* Override article styles to match site design */
+    body {
+      background-color: #FDF5E6;
+      color: #333333;
+      font-family: 'Libre Baskerville', serif;
+      max-width: 800px !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      padding: 4rem 2rem !important;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Mono', monospace;
+      color: #333333;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    h1 { font-size: 2rem; margin: 1.5rem 0 0.8rem 0; }
+    h2 { font-size: 1.4rem; margin: 1.2rem 0 0.6rem 0; }
+    h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem 0; }
+    p { margin: 0 0 1rem 0; }
+    a { color: #2D5D4B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { margin: 0.9rem 0; padding-left: 1.5rem; }
+    li { margin: 0.3rem 0; line-height: 1.7; }
+  </style>
+  </head>
+<body>
+    <img src="https://media.licdn.com/mediaD4E12AQHHjdeCR-jlCw" alt="" title="" />
+      <h1><a href="https://www.linkedin.com/pulse/validate-review-reimburse-automating-desk-reviews-ai-part-labbe-cpa-r60ue">Validate, Review, Reimburse: Automating Desk Reviews with AI Coding Agents (Part 2)</a></h1>
+    <p class="created">Created on 2025-11-21 14:43</p>
+  <p class="published">Published on 2025-11-28 15:46</p>
+  <div><p>Right now, the most powerful way to use AI tools in this space isn’t chasing some generic software platform or product; it’s building <strong>small, custom tools</strong> that match your workflows exactly, and that you actually own.</p><p>I've seen a lot of state run programs where the state would pay <strong>hundreds of thousands of dollars</strong> to a accounting and consulting firms to:</p><ul><li><p>Collect over hundreds (400+) cost report spreadsheets from districts or organizations</p></li><li><p>Validate the data</p></li><li><p>Perform desk reviews on the data based on program rules</p></li><li><p>Sign off that the reports met certain limits and ratios</p></li></ul><h3>Two core steps: validation and desk review</h3><p>In many cost report processes that have a reimbursement mechanism, there are usually two big steps after you get the spreadsheets:</p><p><strong>Validation - Should we accept the cost report? </strong></p><ul><li><p>Do percentages add up to 100%?</p></li><li><p>Are there names in the name fields?</p></li><li><p>Are there numbers in the numeric columns?</p></li><li><p>Are dates actually valid dates?</p></li></ul><p><strong>Desk review - Are there any problems with the data in the cost report? </strong></p><ul><li><p>Does the data conform to policy limits or thresholds?</p></li><li><p>Did the district charge a payroll tax rate above the 1.45% Medicare rate?</p></li><li><p>Did they charge executive salaries over a threshold?</p></li><li><p>Are benefit percentages (healthcare, retirement) within allowed ranges?</p></li></ul><p>Depending on the results, we would might send it back to the district to resolve or write up a finding and adjustment to correct the amounts.</p><p>These requirements:</p><ul><li><p>Are <strong>clearly defined</strong></p></li><li><p><strong>Apply equally</strong> to every cost report</p></li><li><p><strong>Take a long time</strong> when you have hundreds of reports</p></li></ul><p>Important work, but also <strong>highly manual, repeatable, and rule-driven</strong>. That’s exactly the kind of process that can be automated in 2025. These kinds of automations are within reach if you can learn a bit about how to work with AI coding agents like Codex.</p><h3>Why use an AI coding agent like Codex?</h3><p>I’m using OpenAI's Codex (an AI coding agent) for this project, but the pattern works with any strong coding agent.</p><p>The reason tools like this are powerful isn’t that they “do the work” for you in some mysterious way. It’s that they let you:</p><ul><li><p>Harness the full power of computer programming</p></li><li><p>Without spending months learning every detail of a language and its ecosystem</p></li><li><p>While ending up with a <strong>tool you can run locally, securely, and on your own terms</strong></p></li></ul><p>Instead of paying every month for a black box SaaS you don’t control, you:</p><ul><li><p>Spin up a simple Python project</p></li><li><p>Point your coding agent at your real cost report files</p></li><li><p>Describe your validation and desk review rules</p></li><li><p>Let it generate the code and tests</p></li><li><p>Own the script, database, and CSV outputs at the end</p></li></ul><h3>Walkthrough </h3><p>In the <strong>first video</strong> in this series, I showed how to use Codex to:</p><ul><li><p>Take a folder of synthetic test cost reports</p></li><li><p>Extract the data</p></li><li><p>Compile it into a single dataset</p></li><li><p>Store it in a small database and CSV export</p></li></ul><p>That replaced a manual data extraction workflow I’ve seen replayed for years in real jobs.</p><p>In this <strong>second step</strong>, we’re layering on:</p><ul><li><p>A <strong>validation</strong> step:Check that name fields are non-empty textAmount fields (salary, state share, federal share, healthcare, retirement, etc.) are numeric and non-nullPercent fields are numeric, between 0 and 1, and sum to 1Date fields parse as valid dates</p></li></ul><p>Each cost report either: <strong>Passes</strong> validation, or <strong>Fails</strong>, gets a clear explanation of what went wrong, and gets flagged to send back to the district</p><ul><li><p>A <strong>desk review</strong> step: Calculate per-employee totals and percentages (total payroll costs, state/federal portions, healthcare %, retirement %)Apply simple policy rules such as:Salaries over a threshold (e.g., $60,000 of state-related payroll costs) generate a finding and adjustmentHealthcare costs over a threshold percentage (e.g., 7% of salaries) generate a finding and adjustment</p></li></ul><p>The <strong>exact thresholds and details</strong> aren’t the main point. I’m using small round numbers and simple rules. The important part is:</p><p>If you can define the rules you want applied to the data, you can encode <strong>your own rules</strong>, for <strong>your own program</strong>, as code you understand and control.</p><h3>Why this matters for government programs</h3><p>In the private sector, AI often gets pitched as a way to grow revenue: serve more customers, launch new products, and so on.</p><p>In government programs, the win is usually more straightforward:</p><ul><li><p>Reduce the cost of necessary or excessive administrative work</p></li><li><p>Free human staff for tasks that actually require human judgment and communication</p></li><li><p>Make repeatable processes <strong>faster, more consistent, and more transparent</strong></p></li></ul><p>A validation and desk review workflow like this checks all the boxes:</p><ul><li><p>High volume, repetitive tasks</p></li><li><p>Clear rules and thresholds</p></li><li><p>Low professional judgment once the rules are set</p></li><li><p>Huge time savings when automated, especially at scale</p></li></ul><p>And most importantly: with a coding agent and a bit of guidance, you can build these tools yourself, on top of spreadsheets and rules you already understand.</p><p>You don’t need a massive IT team or project. You need a series of <strong>small, repeatable wins</strong>—and a mindset shift from “we should buy a tool for this” to “we can build a lightweight tool we own.”</p><div><iframe allowfullscreen="true" frameborder="0" height="405" src="https://www.linkedin.com/embeds/publishingEmbed.html?articleId=8803851659288400484" width="720"></iframe></div><p></p><p></p><p></p></div>
+</body>
+</html>

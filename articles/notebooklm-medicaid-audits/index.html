@@ -1,0 +1,181 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Using Google's NotebookLM to Transform Medicaid Audit Reports into a Podcast Full of Accessible Insights</title>
+    <link rel="canonical" href="https://scottlabbe.me/articles/notebooklm-medicaid-audits/" />
+<style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    /* Override article styles to match site design */
+    body {
+      background-color: #FDF5E6;
+      color: #333333;
+      font-family: 'Libre Baskerville', serif;
+      max-width: 800px !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      padding: 4rem 2rem !important;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Mono', monospace;
+      color: #333333;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    h1 { font-size: 2rem; margin: 1.5rem 0 0.8rem 0; }
+    h2 { font-size: 1.4rem; margin: 1.2rem 0 0.6rem 0; }
+    h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem 0; }
+    p { margin: 0 0 1rem 0; }
+    a { color: #2D5D4B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { margin: 0.9rem 0; padding-left: 1.5rem; }
+    li { margin: 0.3rem 0; line-height: 1.7; }
+  </style>
+  </head>
+<body>
+    <img src="https://media.licdn.com/mediaD4E12AQENLCfbuYVXRw" alt="" title="" />
+      <h1><a href="https://www.linkedin.com/pulse/using-googles-notebooklm-transform-medicaid-audit-full-labbe-cpa-tkmoe">Using Google's NotebookLM to Transform Medicaid Audit Reports into a Podcast Full of Accessible Insights</a></h1>
+    <p class="created">Created on 2025-01-16 22:57</p>
+  <p class="published">Published on 2025-01-17 00:13</p>
+  <div><p>As someone who is familiar with the Medicaid program as a legislative auditor and a consultant, I recently experimented with a very interesting AI tool that summarizes and transforms information from different files into engaging, digestible audio content (I'm calling it a podcast). In this case, I uploaded reports about Medicaid from the Government Accountability Office (GAO) and the results were pretty remarkable considering how easy it was to use.</p><p>It's called NotebookLM from Google (<a href="https://notebooklm.google.com" target="_blank">https://notebooklm.google.com</a>). This tool seems like a great way to add another dimension to gaining an understanding of new programs or gaining new information about programs you work on. I wanted to share this experience and some notes with fellow auditors, regulators, and government professionals who might benefit from this tool for knowledge sharing and learning.</p><p>This experience confirms something I tell people all the time, AI tools become truly powerful when we apply them to our own data and expertise, amplifying rather than replacing our established processes. Whether you're a legislative auditor, federal regulator, or program manager, tools like this can help make collective knowledge more accessible and actionable.</p><p>Would you like to learn more about how this tool could support your work? Feel free to reach out or share your thoughts in the comments.</p><h3>The Power of AI-Driven Content Transformation</h3><p>I uploaded 5 audit reports from the GAO that discuss different issues in the Medicaid program. The tool summarized and analyzed the reports, transformed this information into an conversational audio format, and created comprehensive podcast that not only maintained accuracy of information in the reports but also presented the information in an engaging, narrative format. </p><p>What impressed me most was its ability to synthesize information across reports while maintaining specific details and nuances contained in each report.</p><p><a href="https://www.gao.gov/reports-testimonies" target="_blank">GAO Reports</a> included:</p><ul><li><p>Efforts to Address Fraud in Nonemergency Medical Transportation</p></li><li><p>Medicaid: State Directed Payments in Managed Care</p></li><li><p>Rapid Spending Growth in State Directed Payments Needs Enhanced Oversight and Transparency</p></li><li><p>Opportunities Exist for CMS to Strengthen Use of State Auditor Findings and Collaboration</p></li><li><p>Managed Care Plans’ Prior Authorization Decisions for Children Need Additional Oversight</p></li></ul><p>Here's a link if you want to give it a listen: <a href="https://notebooklm.google.com/notebook/56f44409-e597-467e-93d0-4c63285efb52/audio" target="_blank">https://notebooklm.google.com/notebook/56f44409-e597-467e-93d0-4c63285efb52/audio</a></p><p>The first 15 minutes is what I'm going to focus on, after the first half, the podcast went back through the reports to add additional details about best practices, impact, recommendations, and even one time asking the listener to "think about what it would be like to have a child who needs certain medical care that faces constant denials and prior authorization requests."</p><p>Here’s the prompt I used to create the podcast:</p><p>From an expert auditor's perspective, focus on material findings, financial impact, systemic issues, root causes, implementation challenges, and best practices.</p><h3>Key Segments Breakdown (with timestamps)</h3><h3>Medicaid and Managed Care Overview (00:57)</h3><p>The podcast begins with a clear foundation, explaining the fundamental concepts of Medicaid and managed care before getting into the details of each report.</p><h3>Non-Emergency Medicaid Transportation (2:00)</h3><p>This section does an impressive die into the program's most challenging areas, covering:</p><ul><li><p>Comprehensive fraud statistics from the report.</p></li><li><p>State-level anti-fraud initiatives.</p></li><li><p>Real-world challenges facing the program like employee turnover and low pay and how that significantly strains the verification and background check process.</p></li></ul><h3>State Auditors' Role in Medicaid (4:42)</h3><p>The discussion of state auditors' responsibilities is particularly insightful, highlighting:</p><ul><li><p>Persistent, repeat issues across multiple reporting periods identified by state auditors. </p></li><li><p>Common findings regarding overpayments and ineligible providers.</p></li><li><p>Critical IT system challenges, including an almost exasperated host asking why IT issues are so prevalent in such a significant program.</p></li><li><p>Structural obstacles to effective oversight such as data collection and sharing.</p></li></ul><h3>State-Directed Payments (6:40)</h3><p>A detailed explanation of how states manage directed payment programs, including:</p><ul><li><p>Competing priorities between lawmakers, regulators, and providers adds complexity to the program. </p></li><li><p>Specific spending data from audit reports on directed payment programs.</p></li><li><p>Transparency challenges in how states raise and disburse funds.</p></li><li><p>Identified best practices for states administering the programs.</p></li></ul><h3>Children's Care Access and Prior Authorization (9:09)</h3><p>This crucial segment addresses:</p><ul><li><p>EPSDT service authorization complexities between what regulators allow and what managed care organizations want to scrutinize</p></li><li><p>Impact of unclear rules on service delivery</p></li><li><p>Recommendations for CMS policy clarification</p></li><li><p>Data publication needs for better oversight</p></li></ul><h3>Appeals and Grievances (12:20)</h3><p>The analysis covers:</p><ul><li><p>Interstate variations in appeal rates</p></li><li><p>Data collection gaps and how they limit information and analysis of the programs</p></li><li><p>Poses important questions about denial patterns and appeal outcomes</p></li></ul><h3>Best Practices and Human Impact (15:20-end)</h3><p>About halfway through the podcast, the hosts circle back through each report and give additional details about key information, issues facing the program, best practices, and recommendations to improve oversight of the program.</p><p>#MedicaidOversight #HealthcareInnovation #AuditTechnology #ProgramIntegrity #HealthcareAI #GAO #AI #Medicaid </p></div>
+</body>
+</html>

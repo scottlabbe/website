@@ -1,0 +1,274 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Why Accurate Context Matters More Than Clever Prompting</title>
+    <link rel="canonical" href="https://scottlabbe.me/articles/why-accurate-context-matters-more-than-clever-prompting/" />
+<style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    /* Override article styles to match site design */
+    body {
+      background-color: #FDF5E6;
+      color: #333333;
+      font-family: 'Libre Baskerville', serif;
+      max-width: 800px !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      padding: 4rem 2rem !important;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Mono', monospace;
+      color: #333333;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    h1 { font-size: 2rem; margin: 1.5rem 0 0.8rem 0; }
+    h2 { font-size: 1.4rem; margin: 1.2rem 0 0.6rem 0; }
+    h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem 0; }
+    p { margin: 0 0 1rem 0; }
+    a { color: #2D5D4B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { margin: 0.9rem 0; padding-left: 1.5rem; }
+    li { margin: 0.3rem 0; line-height: 1.7; }
+  </style>
+</head>
+<body>
+    <h1><a href="https://www.linkedin.com/pulse/why-accurate-context-matters-more-than-clever-prompting-labbe-cpa">Why Accurate Context Matters More Than Clever Prompting</a></h1>
+    <p class="created">Created on 2026-01-09</p>
+  <p class="published">Published on 2026-01-09</p>
+  <div><p>I'm trying to show auditors and program managers in government what useful AI use actually looks like by automating a desk review process end-to-end with coding agents like OpenAI's Codex.</p>
+
+<p>Auditing and program management workloads already have documented structure with its rules, templates, approvals, repeatable processes. Coding agents let you turn that structure into a tool you can run whenever you need it, with logs and checks instead of copy/paste madness.</p>
+
+<h2>Automating cost report desk reviews</h2>
+
+<p>So far in this series of automating desk review processes, we've:</p>
+
+<ul>
+  <li><p><strong>Automated Excel extraction</strong> – Took a folder of cost report spreadsheets and had a coding agent build an extraction script, dataset, and database.</p></li>
+  <li><p><strong>Automated validation & desk review procedures</strong> – Added rules to check data quality and apply simple limits and thresholds, producing findings and adjustments.</p></li>
+</ul>
+
+<p>In this next step, we're turning those desk-reviewed results into something districts actually use and rely on for their reimbursement:</p>
+
+<ul>
+  <li><p>A final cost report summary</p></li>
+  <li><p>A findings / adjustment letter</p></li>
+  <li><p>Word and PDF versions of both, ready to send</p></li>
+</ul>
+
+<p>One term you'll hear a lot about in the future is: <strong>context engineering</strong>. It is the practice of designing, structuring, and optimizing the information (context) provided to an AI model to help it produce accurate and high-quality outputs.</p>
+
+<p>In this case, it's about giving the model the right inputs, templates, and guardrails so it fills in the blanks consistently instead of making judgment calls. And in government work, the best kind of context is found in the existing structure and documentation that support programs like statutes, guidance, forms, templates, training materials, and manuals.</p>
+
+<h2>Shrinking the lane for the model</h2>
+
+<p>Considering the idea of context engineering for a task like this, one the most important factors to think about is how to shrink the lane the model works in. A vague prompt is bad because it can let the model search over infinite possible answers, you're left hoping the model made the right assumptions. The goal should be to give it enough context that it's choosing among the fewest possible number of clearly correct options.</p>
+
+<p>Large AI models are trained to be helpful. If you give them a vague prompt, they might try to "improve" things by rewriting the wording of a letter to sound friendlier, reformatting a standardized table when there are no values to report, or maybe they'll "clarify" or "simplify" a regulatory citation to be more readable.</p>
+
+<p>While that may be fine when you're exploring ideas or creating toy apps but in real-world program management, auditing, and reimbursement work, that's a disaster. You simply cannot have an AI rewriting pre-approved legal templates or contractual language. You need it to fill in the blanks, not redesign the process using its own judgement.</p>
+
+<h2>Building a prompt</h2>
+
+<p>When I build these tools, I use a framework that treats the AI less like a magic box and more like a junior staff member:</p>
+
+<ul>
+  <li><p><strong>Goal</strong> – What is the overall goal for working with the AI tool?</p></li>
+  <li><p><strong>Step-by-step logic</strong> – What are the specific steps that need to occur?</p></li>
+  <li><p><strong>Context</strong> – What information does the model need to perform each step in the task? Like existing code, relevant data, guardrails for what not to do.</p></li>
+  <li><p><strong>Outputs</strong> – What should the output look like at each step? Like historical examples, templates, something that can be checked and verified</p></li>
+</ul>
+
+<p>One area where I've changed my prompt style is when realizing that asking the model to "act smart" or "be an expert" isn't the best way to get the output I wanted. It's about designing a lane where the correct result is the easiest result.</p>
+
+<p>I'll share a portion of the prompt for this step below but you'll have to review the Github page to see the entire thing.</p>
+
+<h3>Prompt</h3>
+
+<pre>
+## Goal
+Build a reporting script that:
+1. Reads all districts from the database
+2. Aggregates cost data per district (state vs. federal totals)
+3. Fills in both Word templates for each district
+4. Converts each to PDF
+5. Saves outputs in a structured folder
+
+## Context
+The database `program_management/extract_data/cost_reports.db` contains 
+desk-reviewed data for multiple districts. Schema reference is in 
+`DATABASE_REFERENCE.md`.
+
+Tables you'll use:
+- `cost_reports` – employee-level salary/benefits data
+- `contact_info` – district contact metadata  
+- `desk_review_findings` – finding narratives per district
+
+The folder `templates/` contains:
+- `desk_review_letter_template.docx`
+- `desk_review_findings_template.docx`
+</pre>
+
+<h2>Completed Reports</h2>
+
+<p>Here's an example of the outputs from the python code generated by the Codex agent. An impressive result for sure. It initially was incorrectly listing findings in the findings list when there were no findings but Codex was able to take my feedback and correct the issue.</p>
+
+<h2>Reflection</h2>
+
+<p>This demo uses six cost reports. The real process I managed had over 400 and took nearly a year and hundreds of billable hours to review the data, document findings, run calculations, and produce reimbursement packets to the appropriate standards.</p>
+
+<p>I'm not claiming this approach replaces that entire engagement. But it shows where the leverage is: once you've defined the rules, templates, and structure, the repetitive execution doesn't have to be manual. Real, important work can shift from producing documents to verifying them.</p>
+
+<p>That's the thread through this whole series. Extraction, validation, and now output generation, none of it required clever prompting or AI tricks. It required pointing the model at the structure it needed to perform the task and narrowing its job to filling in blanks.</p>
+
+<p>Often, it's thought of as bureaucratic overhead if your department or program has training materials or documented procedures gathering dust in a SharePoint folder. It might be time to rethink that when you can use coding agents to transform rules and documents into a robust automated process.</p>
+
+<p>Check the YouTube video if you want to see how well the coding agent can automate this repetitive tasks.</p>
+
+<div><iframe allowfullscreen="true" frameborder="0" height="405" src="https://www.youtube.com/embed/OzGQa17yGgI" width="720"></iframe></div>
+
+<p>Code & templates on GitHub: <a href="https://github.com/scottlabbe/program_management">https://github.com/scottlabbe/program_management</a></p>
+
+</div>
+</body>
+</html>

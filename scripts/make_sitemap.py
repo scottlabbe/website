@@ -8,7 +8,13 @@ EXCLUDE_DIRS = {"assets", "scripts", ".git"}  # tweak if you add more later
 SKIP_FILES = {"404.html"}  # add any utility pages you don't want indexed
 
 def is_excluded(path: Path) -> bool:
-    return any(part.startswith(".") or part in EXCLUDE_DIRS for part in path.parts)
+    if any(part.startswith(".") or part in EXCLUDE_DIRS for part in path.parts):
+        return True
+    # Skip legacy article sources; only clean slugs should be indexed.
+    parts = set(path.parts)
+    if "articles" in parts and "data" in parts:
+        return True
+    return False
 
 def to_url(path: Path) -> str:
     rel = path.relative_to(BUILD_DIR).as_posix()

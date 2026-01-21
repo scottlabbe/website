@@ -1,0 +1,181 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Beyond 'Summarize This': Crafting a Simple, Effective AI Prompt for Audit Analysis</title>
+    <link rel="canonical" href="https://scottlabbe.me/articles/beyond-summarize/" />
+<style>
+    body {
+      margin: 0 auto;
+      width: 744px;
+      font-family: Source Serif Pro, serif;
+      line-height: 32px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 21px;
+    }
+    h1, h2, h3 {
+      font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    }
+    h1 a, h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+    h1 {
+      line-height: 48px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 42px;
+      margin: 32px 0 20px;
+    }
+    h2 {
+      line-height: 32px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 26px;
+      margin: 28px 0;
+    }
+    h3 {
+      line-height: 28px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 21px;
+      margin: 24px 0;
+    }
+    p {
+      margin: 32px 0;
+    }
+    .created, .published {
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 15px;
+      line-height: 15px;
+      margin: 20px 0;
+    }
+    .created + .published {
+      margin-top: -12px;
+    }
+    blockquote {
+      font-family: Georgia, Source Serif Pro, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 36px;
+      margin: 48px 120px;
+      text-align: center;
+    }
+    a {
+      word-wrap: break-word;
+      outline: none;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      color: #008CC9;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #8C68CB;
+    }
+    .center {
+      text-align: center;
+    }
+    iframe {
+      display: block;
+      margin: 44px auto;
+    }
+    *:not(pre) + pre, pre:first-of-type {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+    pre:only-of-type {
+      margin: 32px 0;
+      padding: 32px;
+    }
+    pre {
+      background: #F3F6F8;
+      overflow-x: auto;
+      display: block;
+      font-size: 13px;
+      font-family: monospace;
+      line-height: 13px;
+      padding: 0 32px 32px;
+      white-space: pre;
+    }
+    a.embedded {
+      background: #F3F6F8;
+      display: block;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+    .slate-image-embed__resize-full-width img {
+      width: 100%;
+    }
+    .series-logo {
+      width: 48px;
+      height: 48px;
+      box-sizing: border-box;
+      background-clip: content-box;
+      border: 4px solid transparent;
+      border-radius: 6px;
+      object-fit: scale-down;
+      float: left;
+    }
+    .series-title {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: top;
+    }
+    .series-description {
+      color: rgba(0,0,0,.6);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    div {
+      margin: 32px 0;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    /* Override article styles to match site design */
+    body {
+      background-color: #FDF5E6;
+      color: #333333;
+      font-family: 'Libre Baskerville', serif;
+      max-width: 800px !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      padding: 4rem 2rem !important;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Mono', monospace;
+      color: #333333;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    h1 { font-size: 2rem; margin: 1.5rem 0 0.8rem 0; }
+    h2 { font-size: 1.4rem; margin: 1.2rem 0 0.6rem 0; }
+    h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem 0; }
+    p { margin: 0 0 1rem 0; }
+    a { color: #2D5D4B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { margin: 0.9rem 0; padding-left: 1.5rem; }
+    li { margin: 0.3rem 0; line-height: 1.7; }
+  </style>
+  </head>
+<body>
+    <img src="https://media.licdn.com/mediaD4E12AQEQhYfixIV7gg" alt="" title="" />
+      <h1><a href="https://www.linkedin.com/pulse/beyond-summarize-crafting-simple-effective-ai-prompt-audit-scott-tjyre">Beyond 'Summarize This': Crafting a Simple, Effective AI Prompt for Audit Analysis</a></h1>
+    <p class="created">Created on 2024-10-16 21:39</p>
+  <p class="published">Published on 2024-10-17 15:35</p>
+  <div><p>The effectiveness of using AI tools largely depends on how we communicate with it. The problem faced by a lot of people who use AI tools: is an AI tool not capable of accomplishing your task or is your prompt not good enough to get the results you're looking for?</p><p>Your prompt is the AI’s guiding light. The quality of your prompt put into the model significantly affects the quality of the output. The adage ‘garbage in, garbage out’ holds true here as much as it does anywhere else in life.</p><p>Last week, I published a simple audit summary tool that extracts specific information from pdf audit reports to create a report summary and then gets AI-generated insights and potential audit ideas to perform in the future based on the report and the key issues identified.</p><p><a href="https://www.linkedin.com/pulse/from-pdf-insight-leveraging-ai-streamline-audit-scott-labbe-cpa-gjgve/?trackingId=chS5oh%2BQkycwbsleNmSgRw%3D%3D" target="_blank">Previous Article: From PDF to Insight</a></p><p>Check out the tool, upload a report from OIG or GAO or any audit organization, and let me know what you think.</p><p>It's a simple demonstration that uses AI to extract key information from a pdf document in a standardized format, consistently, and reliably. But even a simple tool like this requires a prompt more complex than, "please summarize this audit report."</p><p><strong>Audit Analyzer Tool Prompt</strong></p><p>Here's the prompt that is being sent to the AI models to create consistent and reliable audit summaries and AI generated audit ideas. It's written in the python programming language and it includes the report language embedded inside the request.</p><p>prompt = f"""</p><p>&nbsp;&nbsp;&nbsp; Analyze the following audit report content and extract key information:</p><p>&nbsp;&nbsp;&nbsp; {content}&nbsp; # content is the text data from the uploaded pdf.</p><p>&nbsp;&nbsp;&nbsp; Please extract and provide the following information in a structured JSON format:</p><p>&nbsp;&nbsp;&nbsp; 1. "report_title": The title of the audit report.</p><p>&nbsp;&nbsp;&nbsp; 2. "audit_organization": The federal or state organization that conducted the audit and published the report.</p><p>&nbsp;&nbsp;&nbsp; 3. "audit_objectives": A list of all the objectives of the audit.</p><p>&nbsp;&nbsp;&nbsp; 4. "overall_conclusion": The overall conclusion or summary of the audit findings.</p><p>&nbsp;&nbsp;&nbsp; 5. "key_findings": A list of the main findings from the audit.</p><p>&nbsp;&nbsp;&nbsp; 6. "recommendations": A list of recommendations based on the audit findings.</p><p>&nbsp;&nbsp;&nbsp; 7. "llm_insight": Your insights or analysis based on the report content.</p><p>&nbsp;&nbsp;&nbsp; 8. "potential_audit_objectives": A list of useful potential audit objectives for future audits based on this report.</p><p>&nbsp;&nbsp;&nbsp; Ensure your response is a valid JSON object with these exact keys and nothing else.</p><p>&nbsp;&nbsp;&nbsp; If you're unsure about any field, use "N/A" for string fields or an empty list for list fields.</p><p>&nbsp;&nbsp;&nbsp; """</p><p>For the prompt in the Audit Analyzer tool, I kept it simple by outlining the exact fields and descriptions of the information I needed the model to focus on. By being clear and specific, you can reduce the chances of the AI misinterpreting your request or providing irrelevant information. </p><p>I also asked the AI model for the output in a structured format called JSON which is useful to organize data and makes it easy to save or transform for further processing or integration into other systems. This is a powerful use of AI models, extraction of unstructured data and transforming the data into an organized structured format.</p><p><strong>Mind your words</strong></p><p>Each word you add to your prompt teaches the model how to respond and switching one word in your prompt will dramatically change the character of the output. For instance, 'tell me about Java coffee' will generate information about the coffee produced in Java, whereas 'tell me about Java Indonesia' prompts the AI to discuss the island's geography, culture, and history. The model can answer both questions thoughtfully and coherently at any length you want, and all we have to do is substitute one word.</p><p>But let's project out this problem to a tool like the Audit Analyzer tool, if you need a summary of a long report or document, should you simply ask the AI tool to summarize the document? Unfortunately, without direction, the tool might provide a paragraph with a general overview without detail on the issues, or it could get distracted with insignificant aspects of the report, or maybe it provides the summary with a bulleted list.</p><p>By specifying 'audit_objectives' and 'key_findings' etc., and the output format, we ensure the AI focuses on extracting the most critical information relevant to our analysis and preparing it to input into downstream processes.</p><p><strong>The Prompt is Where You Teach Your Problem</strong></p><p>The take home message I want to communicate is, think about your prompt as where you teach the model the information needed to tackle your problem or task, treat it as if you were teaching an intern or new hire to accomplish a similar task for the first time, what information do you think they would need to create the best results?</p><p>Invest the time to provide the model with very clear instructions for the task and output you need help with, you can describe the audience for the output, provide examples of quality output that you want repeated, explain the context for how this task fits into a larger process, or whatever you think might make it easier for the model to succeed at this task and I bet you will see impressive results.</p></div>
+</body>
+</html>
