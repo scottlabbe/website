@@ -1,5 +1,6 @@
 <html>
 <head>
+  <meta charset="utf-8" />
   <title>From Documents to Web App: Harnessing AI to Transform Reference Materials</title>
   <style>
     body {
@@ -136,11 +137,43 @@
       margin: 32px 0;
     }
   </style>
-</head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    /* Override article styles to match site design */
+    body {
+      background-color: #FDF5E6;
+      color: #333333;
+      font-family: 'Libre Baskerville', serif;
+      max-width: 800px !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      padding: 4rem 2rem !important;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Mono', monospace;
+      color: #333333;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    h1 { font-size: 2rem; margin: 1.5rem 0 0.8rem 0; }
+    h2 { font-size: 1.4rem; margin: 1.2rem 0 0.6rem 0; }
+    h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem 0; }
+    p { margin: 0 0 1rem 0; }
+    a { color: #2D5D4B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { margin: 0.9rem 0; padding-left: 1.5rem; }
+    li { margin: 0.3rem 0; line-height: 1.7; }
+  </style>
+  </head>
 <body>
       <h1>From Documents to Web App: Harnessing AI to Transform Reference Materials</h1>
     <p class="created">Created on 2025-04-01 01:25</p>
-  <p class="published">Published on ---</p>
+  <p class="published">Published on 2025-04-01 01:25</p>
   <div><p>AI tools have advanced rapidly, making it surprisingly simple to transform dense reference materials into interactive, practical web applications. This article demonstrates how, with just a few thoughtful prompts, you can convert program guides, rules, and training documents into an educational and accessible web app.</p><h3>Why Breaking Down Problems is Essential</h3><p>The key to getting powerful results from AI models lies in your ability to clearly define and break down problems into discrete, manageable tasks that AI can handle effectively. This involves:</p><ol><li><p>Identifying the distinct steps involved in your project.</p></li><li><p>Choosing appropriate AI tools for each task.</p></li><li><p>Refining and integrating outputs to achieve your goal.</p></li></ol><h3>Real-Life Scenario: Government Program Documentation</h3><p>Most government programs rely on extensive documentation like training manuals, program guidelines, and rules/requirements documents. These documents are usually thorough but can be overwhelming and underutilized.</p><p>Imagine if these documents could be instantly transformed into a user-friendly, informative web app, providing program personnel and administrators clear instructions, FAQs, and practical guidance. Let’s walk through how this can be done using the example of the School-Based Medicaid Program (SBMP).</p><h3>Step-by-Step Approach</h3><p>Before creating the best prompt for the problem, I broke down the problem down into actionable steps that can be handed off to AI models:</p><ul><li><p>I want to transform manuals, training documents, and rules into web app content.</p></li><li><p>I want to create the application files based on the reference documents.</p></li></ul><h3>Which Model for Which Problem</h3><p>Part of breaking down the problem will be knowing which models are best at handling which kinds of problems.</p><ul><li><p><strong>Creating Web Content</strong> - Google released a new reasoning Gemini model recently called Gemini 2.5 Pro, and I wanted to test out on the first two steps of the problem. I used it to extract information from pdfs of rules about two key government processes and turn them into a content plan to make a web app helping educate the admin staff that participates in the program. It's called a reasoning model because it spends time thinking through the problem before responding. </p></li></ul><p><a href="https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/" target="_blank">https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/</a></p><ul><li><p><strong>Creating the Web Application</strong> - The Replit Agent is a different tool that excels at turning ideas and plans into a fully functional, modern web app. Replit is particularly useful because it excels at filling in the gaps in my skills between what I know how to do with code/programming and the full set of skills required to deploy a web app on the internet.</p></li></ul><p><a href="https://docs.replit.com/replitai/agent" target="_blank">https://docs.replit.com/replitai/agent</a></p><p>I used exactly these prompts below but I refined the output to match what I needed and to remove sensitive information that’s not important for an experiment like this.</p><h3>Step 1 - Gemini 2.5 Pro: Extract relevant information and generate content plan</h3><p>To begin, I spent some time developing a prompt that would tell the model how to breakdown the documents and telling it to use the reference documents to create a content plan. It includes the overall goal, the role I want to model to take, and as much background and details I could list.</p><p><strong>Initial Prompt:</strong></p><pre></pre><p><strong>Output (truncated):</strong></p><p><strong>Web App Content Plan: SBMP Cost Reporting &amp; Time Study</strong></p><p>Goal: To provide local education agency (LEA) finance and program staff with clear, accurate, and practical guidance on completing SBMP Cost Reports and participating in the Random Moment Time Study (RMTS), ensuring compliance and maximizing appropriate reimbursement.</p><p>Audience: LEA Finance Staff, Program Coordinators, Medicaid Billing Staff (varying levels of experience).</p><p>Tone: Informative, clear, concise, practical, authoritative. Use plain language.</p><p><strong>I. Homepage / Program Overview</strong></p><p>(Suggested Page Title: SBMP Cost Recovery Program)</p><ul><li><p>Welcome: Briefly introduce the School-Based Medicaid Program (SBMP).</p></li><li><p>Purpose: Explain that SBMP offers local agencies an opportunity to receive federal dollars to offset costs associated with providing specific Medicaid-covered services in the school setting. (Source: Training Slides, p3)</p></li><li><p>Reimbursement Basis: Clearly state that SBMP is reimbursed on a cost basis. (Source: Guide, p1) Explain this means total funds reimbursed are based on the amount of money the LEA spent on allowable services, not just the number of services provided. (Source: Guide, p1) Mention that Medicaid reimburses the federal share, while LEAs contribute the state share using non-federal funds. (Source: Training Slides, p3, p26)</p></li><li><p>Key Components (Link to relevant sections): Cost Reporting: Annual requirement to determine the total eligible cost for reimbursement. (Source: Guide, p1; Training Slides, p5) Random Moment Time Study (RMTS): Used to determine the proportion of staff time spent on Medicaid-allowable activities. (Source: Guide, p1; Training Slides, p6) Allowable Costs: Understanding what expenses can be included. Documentation: Essential for compliance and claiming.</p></li><li><p>Who is this site for? LEA staff involved in finance, program management, and Medicaid claiming for SBMP.</p></li></ul><p><strong>II. Understanding SBMP Reimbursement</strong></p><p>(Suggested Page Title: How SBMP Reimbursement Works)</p><ul><li><p>Cost-Based Reimbursement Explained: Reiterate that reimbursement is tied to actual, allowable LEA expenditures.</p></li></ul><p>◦ The Cost Report is the tool used to calculate the total cost eligible for potential reimbursement. (Source: Guide, p1; Training Slides, p5)</p><p>(It’s a long response…)</p><h3>Discussion</h3><p>Gemini’s response is comprehensive to say the least. When I pasted it into Microsoft Word, it ended up being over 20 pages of information extracted from the reference documents and presented in a content plan that included over 8 different pages including an FAQ and detailed procedure descriptions. </p><h3>Step 2 - Replit Agent: Generate an app that implements the content plan</h3><p>For the next step, I created a prompt that will tell the Replit agent some pointers on how to create and set up the web application along with the content plan.</p><pre></pre><p><strong>Output</strong></p><p>LINK TO WEBSITE</p><h3>Discussion</h3><p>Overall, I was kind of blown away with the output of this simple experiment. It took less than 30 minutes for me to create the prompts, review and refine the output, and launch a full functional web app.</p><p>The real work for this task to be successful was the work involved in creating these detailed procedure manuals, training documents, and reference materials. Once these documents are created, they can unlock additional value by using AI to read, understand, and transform them in new ways for new uses.</p><p>Another takeaway I have about this experiment is that the Gemini 2.5 Pro and Replit agent model are both very powerful. The Gemini model was able to extract the relevant information from the documents and provided a very long and detailed content plan that gave us a really strong roadmap to start with. The Replit agent also preformed impressively, it’s such a remarkable ability to go from a content plan to a fully functional web app in just a few minutes.</p></div>
 </body>
 </html>

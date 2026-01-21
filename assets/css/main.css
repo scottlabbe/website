@@ -193,8 +193,8 @@ ul[style*="list-style:none"] {
   padding: 0;
 }
 
-ul[style*="list-style:none"] li {
-  margin: 1.2rem 0;
+ul[style*="list-style:none"] > li {
+  margin: 0 0 0.8rem 0;
 }
 
 ul[style*="list-style:none"] a {
@@ -207,6 +207,25 @@ ul[style*="list-style:none"] a {
 
 ul[style*="list-style:none"] a:hover {
   text-decoration: underline;
+}
+
+/* --- Article list spacing (fix "too much space" in ol/ul) --- */
+
+main :where(ol, ul:not(.project-list)) {
+  margin: 0.9rem 0;
+  padding-left: 1.5rem;
+}
+
+main :where(ol, ul:not(.project-list)) > li {
+  margin: 0.3rem 0;
+}
+
+main :where(ol, ul:not(.project-list)) li > p {
+  margin: 0;
+}
+
+main :where(ol, ul:not(.project-list)) li {
+  line-height: 1;
 }
 
 /* --- Links --- */

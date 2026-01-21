@@ -56,7 +56,7 @@ def main() -> None:
 
     rows = []
     for it in items:
-        rows.append(f"""<li style="margin:12px 0;">
+        rows.append(f"""<li>
   <div><a href="/articles/data/Articles/{it['file']}">{it['title']}</a></div>
   <div class="small">Published {fmt_date(it['published_dt'])}</div>
 </li>""")
