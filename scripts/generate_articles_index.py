@@ -1,74 +1,73 @@
 #!/usr/bin/env python3
-"""Generate /articles/index.html from the HTML files in /articles/data/Articles.
+"""Generate /articles/index.html from article pages in /articles/*/index.html.
 
 Usage:
   python scripts/generate_articles_index.py
 """
 from __future__ import annotations
 
-import datetime as dt
 import re
 from pathlib import Path
+import datetime as dt
 
 ROOT = Path(__file__).resolve().parents[1]
-ARTICLES_DIR = ROOT / "articles" / "data" / "Articles"
+ARTICLES_DIR = ROOT / "articles"
 OUT = ROOT / "articles" / "index.html"
 
 H1_RE = re.compile(r"<h1[^>]*>(.*?)</h1>", flags=re.IGNORECASE | re.DOTALL)
 PUBLISHED_RE = re.compile(r'class="published">\s*Published on\s*([^<]+)<', flags=re.IGNORECASE)
 CREATED_RE = re.compile(r'class="created">\s*Created on\s*([^<]+)<', flags=re.IGNORECASE)
+META_PUBLISHED_RE = re.compile(r'name="article:published"\s+content="([^"]+)"', flags=re.IGNORECASE)
+META_STATUS_RE = re.compile(r'name="article:status"\s+content="([^"]+)"', flags=re.IGNORECASE)
 TAG_RE = re.compile(r"<[^>]+>")
 
-# Map legacy filenames to clean slugs. Files not listed here are skipped.
-SLUG_MAP = {
-    "why-accurate-context-matters-more-than-clever-prompting-labbe-cpa.html": "why-accurate-context-matters-more-than-clever-prompting",
-    "validate-review-reimburse-automating-desk-reviews-ai-part-labbe-cpa-r60ue.html": "validate-review-reimburse",
-    "tiny-ai-tools-big-wins-automating-cost-report-your-scott-labbe-cpa-qhgde.html": "tiny-ai-tools-big-wins",
-    "ai-structure-make-institutional-memory-searchable-scott-labbe-cpa-zbuce.html": "ai-structure-make-institutional-memory-searchable",
-    "i-spent-hours-learning-python-automate-task-ai-agent-did-labbe-cpa-dvy5c.html": "i-spent-hours-learning-python",
-    "most-dangerous-question-ai-accurate-scott-labbe-cpa-7bwve.html": "most-dangerous-question",
-    "unlocking-institutional-memory-ai-reimagining-audit-scott-labbe-cpa-j0mje.html": "unlocking-institutional-memory",
-    "test-trust-making-ai-work-you-scott-labbe-cpa-teebe.html": "test-it-to-trust-it",
-    "from-routine-remarkable-automating-template-creation-ai-labbe-cpa-c3foe.html": "automating-template-creation",
-    "pdfs-complicated-making-documents-work-ai-tools-scott-labbe-cpa-djkqe.html": "pdfs-are-complicated",
-    "building-reliable-data-pipelines-ai-tools-using-scott-labbe-cpa-ymztc.html": "building-reliable-data-pipelines",
-    "using-googles-notebooklm-transform-medicaid-audit-full-labbe-cpa-tkmoe.html": "notebooklm-medicaid-audits",
-    "experimenting-gpt-4os-image-extraction-capabilities-ai-labbe-cpa-82ede.html": "gpt-4o-image-extraction",
-    "from-manual-automatic-how-ai-python-can-automate-data-labbe-cpa-gogic.html": "from-manual-to-automatic",
-    "beyond-summarize-crafting-simple-effective-ai-prompt-audit-scott-tjyre.html": "beyond-summarize",
-    "from-pdf-insight-leveraging-ai-streamline-audit-scott-labbe-cpa-gjgve.html": "from-pdf-to-insight",
-}
-
 def parse_dt(s: str) -> dt.datetime:
+    if not s:
+        return dt.datetime.min
     try:
         return dt.datetime.strptime(s.strip(), "%Y-%m-%d %H:%M")
+    except Exception:
+        pass
+    try:
+        return dt.datetime.strptime(s.strip(), "%Y-%m-%d")
     except Exception:
         return dt.datetime.min
 
 def fmt_date(d: dt.datetime) -> str:
+    if d == dt.datetime.min:
+        return "Unknown"
     # Avoid %-d portability issues
     return d.strftime("%b %d, %Y").replace(" 0", " ")
 
-def extract_meta(html: str) -> tuple[str, str, str]:
+def extract_meta(html: str) -> tuple[str, str, str, str]:
     h1m = H1_RE.search(html)
     title = TAG_RE.sub("", h1m.group(1)).strip() if h1m else "(Untitled)"
     pubm = PUBLISHED_RE.search(html)
     crem = CREATED_RE.search(html)
+    meta_pubm = META_PUBLISHED_RE.search(html)
+    meta_status = META_STATUS_RE.search(html)
     published = pubm.group(1).strip() if pubm else ""
+    if not published and meta_pubm:
+        published = meta_pubm.group(1).strip()
     created = crem.group(1).strip() if crem else ""
-    return title, created, published
+    status = meta_status.group(1).strip().lower() if meta_status else "published"
+    return title, created, published, status
 
 def main() -> None:
     items = []
-    for p in sorted(ARTICLES_DIR.glob("*.html")):
-        slug = SLUG_MAP.get(p.name)
-        if not slug:
+    for p in sorted(ARTICLES_DIR.glob("*/index.html")):
+        slug = p.parent.name
+        if slug in {"data"} or slug.startswith("."):
             continue
         html = p.read_text(encoding="utf-8", errors="ignore")
-        title, created, published = extract_meta(html)
+        title, created, published, status = extract_meta(html)
+        if status == "draft":
+            continue
         published_dt = parse_dt(published)
+        if published_dt == dt.datetime.min:
+            published_dt = dt.datetime.fromtimestamp(p.stat().st_mtime)
         items.append({
-            "file": p.name,
+            "file": str(p),
             "slug": slug,
             "title": title,
             "created": created,

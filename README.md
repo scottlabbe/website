@@ -13,15 +13,26 @@ Then open `http://127.0.0.1:8080`
 ## Pages
 
 - **Home** (`/`) — About page with interactive reveal blocks
-- **Articles** (`/articles/`) — Auto-generated from HTML files in `/articles/data/Articles/`
+- **Articles** (`/articles/`) — Auto-generated from published article pages in `/articles/*/index.html`
 - **Videos** (`/videos/`) — Links to YouTube channel
 
 ## Adding Articles
 
-1. Drop your HTML file into `/articles/data/Articles/`
-2. Include a `<p class="published">Published on YYYY-MM-DD HH:MM</p>` tag in the file for date sorting
-3. Run: `python scripts/generate_articles_index.py`
-4. Commit and push
+1. Create a folder: `/articles/<slug>/`
+2. Add your markdown source: `/articles/<slug>/index.md`
+3. Optional front matter at top of `index.md`:
+   - `title: Your Title`
+   - `date: YYYY-MM-DD`
+   - `status: published` (or `draft`)
+4. Save images under `/articles/<slug>/images/` and reference like `![Alt](./images/file.png)`
+5. Run: `python scripts/build_articles.py`
+6. Commit and push
+
+### What `build_articles.py` does
+
+- Converts all `/articles/*/index.md` files into `/articles/*/index.html`
+- Rebuilds `/articles/index.html` sorted by publish date (newest first)
+- Rebuilds `/sitemap.xml`
 
 ## Design
 
