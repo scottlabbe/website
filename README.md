@@ -23,6 +23,7 @@ Then open `http://127.0.0.1:8080`
 3. Optional front matter at top of `index.md`:
    - `title: Your Title`
    - `date: YYYY-MM-DD`
+   - `summary: Short 1-2 sentence summary for search snippets`
    - `status: published` (or `draft`)
 4. Save images under `/articles/<slug>/images/` and reference like `![Alt](./images/file.png)`
 5. Run: `python scripts/build_articles.py`

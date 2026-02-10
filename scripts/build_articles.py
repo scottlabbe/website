@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import datetime as dt
 import html
+import json
 import re
 import subprocess
 import sys
@@ -232,22 +233,75 @@ def parse_date(meta: dict[str, str], src: Path) -> dt.date:
     return dt.datetime.fromtimestamp(src.stat().st_mtime).date()
 
 
-def article_template(title: str, published: dt.date, article_html: str, slug: str) -> str:
+def to_plain_text(html_fragment: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", html_fragment)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def summarize(meta: dict[str, str], article_html: str) -> str:
+    raw = meta.get("summary", "").strip()
+    if raw:
+        return raw[:160]
+    plain = to_plain_text(article_html)
+    if len(plain) <= 160:
+        return plain
+    return plain[:157].rsplit(" ", 1)[0] + "..."
+
+
+def article_template(
+    title: str,
+    published: dt.date,
+    article_html: str,
+    slug: str,
+    summary: str,
+    status: str,
+) -> str:
     pub_display = published.isoformat()
     canonical = f"https://scottlabbe.me/articles/{slug}/"
+    json_ld = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": title,
+            "description": summary,
+            "author": {
+                "@type": "Person",
+                "name": "Scott Labbe",
+            },
+            "datePublished": pub_display,
+            "dateModified": pub_display,
+            "mainEntityOfPage": canonical,
+            "url": canonical,
+            "publisher": {
+                "@type": "Person",
+                "name": "Scott Labbe",
+            },
+        }
+    )
     return f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{html.escape(title)}</title>
+  <meta name="description" content="{html.escape(summary, quote=True)}" />
   <link rel="canonical" href="{canonical}" />
   <meta name="article:published" content="{pub_display}" />
-  <meta name="article:status" content="published" />
+  <meta name="article:status" content="{html.escape(status, quote=True)}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{html.escape(title, quote=True)}" />
+  <meta property="og:description" content="{html.escape(summary, quote=True)}" />
+  <meta property="og:url" content="{canonical}" />
+  <meta property="og:site_name" content="Scott Labbe" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{html.escape(title, quote=True)}" />
+  <meta name="twitter:description" content="{html.escape(summary, quote=True)}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">{json_ld}</script>
   <style>
     body {{
       background-color: #FDF5E6;
@@ -266,6 +320,21 @@ def article_template(title: str, published: dt.date, article_html: str, slug: st
       margin: 1.2rem 0 0.6rem;
     }}
     h1 {{ font-size: 2rem; margin-top: 0; }}
+    .site-article-nav {{
+      margin: 0 0 1.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }}
+    .site-article-nav a {{
+      color: #2D5D4B;
+      text-decoration: none;
+    }}
+    .site-article-nav a:hover {{
+      text-decoration: underline;
+    }}
     p {{ margin: 0.9rem 0; }}
     .published {{
       color: rgba(0,0,0,0.6);
@@ -314,6 +383,11 @@ def article_template(title: str, published: dt.date, article_html: str, slug: st
   </style>
 </head>
 <body>
+  <nav class="site-article-nav" aria-label="Article navigation">
+    <a href="/">Home</a>
+    <a href="/articles/">Articles</a>
+    <a href="/videos/">Videos</a>
+  </nav>
   <h1>{html.escape(title)}</h1>
   <p class="published">Published on {pub_display}</p>
   <article>
@@ -328,11 +402,20 @@ def build_one(md_path: Path) -> str:
     text = md_path.read_text(encoding="utf-8")
     meta, body = parse_front_matter(text)
     title = meta.get("title", "").strip() or first_h1(body) or md_path.parent.name
+    status = meta.get("status", "published").strip().lower() or "published"
     content = strip_leading_h1(body)
     published = parse_date(meta, md_path)
     slug = md_path.parent.name
     rendered = render_markdown(content)
-    html_text = article_template(title=title, published=published, article_html=rendered, slug=slug)
+    summary = summarize(meta=meta, article_html=rendered)
+    html_text = article_template(
+        title=title,
+        published=published,
+        article_html=rendered,
+        slug=slug,
+        summary=summary,
+        status=status,
+    )
     out = md_path.parent / "index.html"
     out.write_text(html_text, encoding="utf-8")
     return slug

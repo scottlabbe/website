@@ -6,6 +6,7 @@ SITE = "https://scottlabbe.me"
 BUILD_DIR = Path(".")  # run from /Users/scottlabbe/Projects/website
 EXCLUDE_DIRS = {"assets", "scripts", ".git"}  # tweak if you add more later
 SKIP_FILES = {"404.html"}  # add any utility pages you don't want indexed
+SKIP_PATHS = {"about/index.html"}  # redirect-only page
 
 def is_excluded(path: Path) -> bool:
     if any(part.startswith(".") or part in EXCLUDE_DIRS for part in path.parts):
@@ -33,6 +34,9 @@ urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9
 count = 0
 for html in BUILD_DIR.rglob("*.html"):
     if html.name in SKIP_FILES or is_excluded(html):
+        continue
+    rel_path = html.relative_to(BUILD_DIR).as_posix()
+    if rel_path in SKIP_PATHS:
         continue
     url = ET.SubElement(urlset, "url")
     ET.SubElement(url, "loc").text = to_url(html)

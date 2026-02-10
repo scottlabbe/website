@@ -6,13 +6,15 @@ Usage:
 """
 from __future__ import annotations
 
+import datetime as dt
+import json
 import re
 from pathlib import Path
-import datetime as dt
 
 ROOT = Path(__file__).resolve().parents[1]
 ARTICLES_DIR = ROOT / "articles"
 OUT = ROOT / "articles" / "index.html"
+SITE = "https://scottlabbe.me"
 
 H1_RE = re.compile(r"<h1[^>]*>(.*?)</h1>", flags=re.IGNORECASE | re.DOTALL)
 PUBLISHED_RE = re.compile(r'class="published">\s*Published on\s*([^<]+)<', flags=re.IGNORECASE)
@@ -38,6 +40,13 @@ def fmt_date(d: dt.datetime) -> str:
         return "Unknown"
     # Avoid %-d portability issues
     return d.strftime("%b %d, %Y").replace(" 0", " ")
+
+
+def summarize_title(title: str) -> str:
+    base = f"Articles by Scott Labbe on AI automation, auditing workflows, and Medicaid program operations. Latest posts are listed first."
+    if len(base) <= 160:
+        return base
+    return base[:157] + "..."
 
 def extract_meta(html: str) -> tuple[str, str, str, str]:
     h1m = H1_RE.search(html)
@@ -84,6 +93,17 @@ def main() -> None:
   <div class="small">Published {fmt_date(it['published_dt'])}</div>
 </li>""")
     rows_html = "\n".join(rows)
+    canonical = f"{SITE}/articles/"
+    description = summarize_title("Articles")
+    json_ld = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Articles",
+            "description": description,
+            "url": canonical,
+        }
+    )
 
     page = f"""<!doctype html>
 <html lang=\"en\">
@@ -91,10 +111,21 @@ def main() -> None:
   <meta charset=\"utf-8\" />
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <title>Articles — Scott Labbe</title>
+  <meta name=\"description\" content=\"{description}\" />
+  <link rel=\"canonical\" href=\"{canonical}\" />
+  <meta property=\"og:type\" content=\"website\" />
+  <meta property=\"og:title\" content=\"Articles — Scott Labbe\" />
+  <meta property=\"og:description\" content=\"{description}\" />
+  <meta property=\"og:url\" content=\"{canonical}\" />
+  <meta property=\"og:site_name\" content=\"Scott Labbe\" />
+  <meta name=\"twitter:card\" content=\"summary\" />
+  <meta name=\"twitter:title\" content=\"Articles — Scott Labbe\" />
+  <meta name=\"twitter:description\" content=\"{description}\" />
   <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
   <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
   <link href=\"https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap\" rel=\"stylesheet\">
   <link rel=\"stylesheet\" href=\"/assets/css/main.css\" />
+  <script type=\"application/ld+json\">{json_ld}</script>
 </head>
 <body>
   <div class=\"container\">

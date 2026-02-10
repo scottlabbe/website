@@ -4,13 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Building a Searchable Library of Medicaid Audit Reports with AI</title>
+  <meta name="description" content="A case study on automating document discovery and extraction for government auditors The Problem There are thousands of Medicaid audit reports published..." />
   <link rel="canonical" href="https://scottlabbe.me/articles/medicaid-intelligence-case-study/" />
   <meta name="article:published" content="2026-02-10" />
   <meta name="article:status" content="published" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Building a Searchable Library of Medicaid Audit Reports with AI" />
+  <meta property="og:description" content="A case study on automating document discovery and extraction for government auditors The Problem There are thousands of Medicaid audit reports published..." />
+  <meta property="og:url" content="https://scottlabbe.me/articles/medicaid-intelligence-case-study/" />
+  <meta property="og:site_name" content="Scott Labbe" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Building a Searchable Library of Medicaid Audit Reports with AI" />
+  <meta name="twitter:description" content="A case study on automating document discovery and extraction for government auditors The Problem There are thousands of Medicaid audit reports published..." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building a Searchable Library of Medicaid Audit Reports with AI", "description": "A case study on automating document discovery and extraction for government auditors The Problem There are thousands of Medicaid audit reports published...", "author": {"@type": "Person", "name": "Scott Labbe"}, "datePublished": "2026-02-10", "dateModified": "2026-02-10", "mainEntityOfPage": "https://scottlabbe.me/articles/medicaid-intelligence-case-study/", "url": "https://scottlabbe.me/articles/medicaid-intelligence-case-study/", "publisher": {"@type": "Person", "name": "Scott Labbe"}}</script>
   <style>
     body {
       background-color: #FDF5E6;
@@ -29,6 +39,21 @@
       margin: 1.2rem 0 0.6rem;
     }
     h1 { font-size: 2rem; margin-top: 0; }
+    .site-article-nav {
+      margin: 0 0 1.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .site-article-nav a {
+      color: #2D5D4B;
+      text-decoration: none;
+    }
+    .site-article-nav a:hover {
+      text-decoration: underline;
+    }
     p { margin: 0.9rem 0; }
     .published {
       color: rgba(0,0,0,0.6);
@@ -77,6 +102,11 @@
   </style>
 </head>
 <body>
+  <nav class="site-article-nav" aria-label="Article navigation">
+    <a href="/">Home</a>
+    <a href="/articles/">Articles</a>
+    <a href="/videos/">Videos</a>
+  </nav>
   <h1>Building a Searchable Library of Medicaid Audit Reports with AI</h1>
   <p class="published">Published on 2026-02-10</p>
   <article>
@@ -166,7 +196,7 @@ If the report text is cut off, please extract as much information as possible fr
 <p><strong>PDF parsing is messy, but LLMs handle it well.</strong> Even with inconsistent layouts, text boxes, and multi-column formats, the extraction worked better than I expected. For cleanly formatted PDFs, even small, cheap models (like GPT-5-nano) reliably pick out the right information. I think I benefited form the fact that these agencies make it part of their job to publish clean, informative reports. I focused on creating a well-defined schema and clear instructions, to identify and copy specific content.</p>
 <p><strong>Keyword normalization was harder than expected.</strong> I initially assumed the LLM would generate consistent keywords, but I was sorely mistaken. Building the mapping system required reviewing a lot of different keywords manually to identify synonyms and consolidate terms. This is ongoing work as I learn more about the overall Medicaid program and new reports surface new terminology.</p>
 <p><strong>AI classification was an surprise addition.</strong> The simple "is this a Medicaid performance audit?" filter eliminated a lot of false posititves identified in the search, saving costs of putting unwanted reports through the extraction pipeline.</p>
-<p><strong>API costs were not significant.</strong> -33 reports were processed with gpt-4.1-nano, almost 750k tokens, costing around $0.15. -78 reports were processed with gpt-5-nano, almost 2 million tokens, costing around $0.12.</p>
+<p><strong>API costs were not significant.</strong> 33 reports were processed with gpt-4.1-nano, almost 750k tokens, costing around $0.15. 78 reports were processed with gpt-5-nano, almost 2 million tokens, costing around $0.12.</p>
 <hr />
 <h2>Why This Matters</h2>
 <p>The goal isn't to replace auditors' judgment or automate audit planning, it's to remove the manual work that sits between a question and an answer. When institutional knowledge is scattered across hundreds of PDFs on dozens of websites, even simple questions become research projects at the scale of a program like Medicaid. A searchable database changes that. Planners can quickly see what's already been examined, what issues keep recurring, and how different states approach similar problems.</p>

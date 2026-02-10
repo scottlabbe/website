@@ -135,8 +135,7 @@ The frontend is a React application with faceted search—users can filter by st
 **AI classification was an surprise addition.** The simple "is this a Medicaid performance audit?" filter eliminated a lot of false posititves identified in the search, saving costs of putting unwanted reports through the extraction pipeline. 
 
 **API costs were not significant.** 
--33 reports were processed with gpt-4.1-nano, almost 750k tokens, costing around $0.15. 
--78 reports were processed with gpt-5-nano, almost 2 million tokens, costing around $0.12. 
+33 reports were processed with gpt-4.1-nano, almost 750k tokens, costing around $0.15. 78 reports were processed with gpt-5-nano, almost 2 million tokens, costing around $0.12. 
 
 ---
 
