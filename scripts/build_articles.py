@@ -430,6 +430,7 @@ def main() -> None:
             slug = build_one(md_path)
             print(f"Built /articles/{slug}/")
 
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "enhance_legacy_articles_seo.py")], check=True)
     subprocess.run([sys.executable, str(ROOT / "scripts" / "generate_articles_index.py")], check=True)
     subprocess.run([sys.executable, str(ROOT / "scripts" / "make_sitemap.py")], check=True)
 
