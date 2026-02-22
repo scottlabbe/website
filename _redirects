@@ -1,6 +1,6 @@
 # Redirects for Cloudflare Pages
-http://scottlabbe.me/*  https://scottlabbe.me/:splat  301!
-http://www.scottlabbe.me/*  https://scottlabbe.me/:splat  301!
+http://scottlabbe.me/*  https://scottlabbe.me/:splat  301
+http://www.scottlabbe.me/*  https://scottlabbe.me/:splat  301
 /about    /   301
 /about/   /   301
 /index.html /  301

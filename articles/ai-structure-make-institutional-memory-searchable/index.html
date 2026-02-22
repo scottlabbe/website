@@ -1,6 +1,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI + Structure: Make institutional memory searchable, reliable, and usable</title>
     <link rel="canonical" href="https://scottlabbe.me/articles/ai-structure-make-institutional-memory-searchable/" />
   <meta name="description" content="Most orgs don’t have a knowledge problem—they have a structure problem. Turning scattered PDFs, emails, and slides into a structured reference library is..." />
@@ -10,9 +11,11 @@
   <meta property="og:description" content="Most orgs don’t have a knowledge problem—they have a structure problem. Turning scattered PDFs, emails, and slides into a structured reference library is..." />
   <meta property="og:url" content="https://scottlabbe.me/articles/ai-structure-make-institutional-memory-searchable/" />
   <meta property="og:site_name" content="Scott Labbe" />
+  <meta property="og:image" content="https://scottlabbe.me/articles/ai-structure-make-institutional-memory-searchable/images/aiandstructure.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="AI + Structure: Make institutional memory searchable, reliable, and usable" />
   <meta name="twitter:description" content="Most orgs don’t have a knowledge problem—they have a structure problem. Turning scattered PDFs, emails, and slides into a structured reference library is..." />
+  <meta name="twitter:image" content="https://scottlabbe.me/articles/ai-structure-make-institutional-memory-searchable/images/aiandstructure.png" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI + Structure: Make institutional memory searchable, reliable, and usable", "description": "Most orgs don\u2019t have a knowledge problem\u2014they have a structure problem. Turning scattered PDFs, emails, and slides into a structured reference library is...", "author": {"@type": "Person", "name": "Scott Labbe"}, "mainEntityOfPage": "https://scottlabbe.me/articles/ai-structure-make-institutional-memory-searchable/", "url": "https://scottlabbe.me/articles/ai-structure-make-institutional-memory-searchable/", "publisher": {"@type": "Person", "name": "Scott Labbe"}, "datePublished": "2025-08-21", "dateModified": "2025-08-21"}</script>
 <style>
     body {
@@ -185,6 +188,8 @@
     .site-article-nav { margin: 0 0 1.6rem; font-family: "Space Mono", monospace; font-size: 0.95rem; display: flex; gap: 1rem; flex-wrap: wrap; }
     .site-article-nav a { color: #2D5D4B; text-decoration: none; }
     .site-article-nav a:hover { text-decoration: underline; }
+    .hero { margin: 0 0 1.25rem; }
+    .hero img { display: block; width: 100%; border-radius: 6px; }
   </style>
 </head>
 <body>
@@ -193,10 +198,12 @@
     <a href="/articles/">Articles</a>
     <a href="/videos/">Videos</a>
   </nav>
-    <img src="https://media.licdn.com/mediaD4E12AQGHyKH4NOjObA" alt="" title="" />
+  <figure class="hero">
+    <img src="images/aiandstructure.png" alt="AI + Structure: Make institutional memory searchable" />
+  </figure>
       <h1><a href="https://www.linkedin.com/pulse/ai-structure-make-institutional-memory-searchable-scott-labbe-cpa-zbuce">AI + Structure: Make institutional memory searchable, reliable, and usable</a></h1>
     <p class="created">Created on 2025-08-21 00:50</p>
   <p class="published">Published on 2025-08-21 14:14</p>
-  <div><p>Most orgs don’t have a knowledge problem—they have a structure problem. Turning scattered PDFs, emails, and slides into a structured reference library is the key to turning piles of files into useful data.</p><p>PDFs, emails, and slides are where truth lives but these files are most often scattered around in shared drives, too overwhelming to explore and only useful if you know where to look.</p><h3>Real-World Use Case: Medicaid Audit Reports</h3><p>I built a web tool that compiles, extracts, and indexes one domain: <strong>Medicaid audit reports</strong> across the U.S. Although these reports share common elements, like <strong>objectives, scope, conclusions, findings, recommendations</strong>, every publisher formats them differently. That variation makes reading slow and comparison harder.</p><p>Check it out here: <a href="https://medicaidaudit.org" target="_blank">https://medicaidaudit.org</a></p><h3>The core idea: AI → Structure → Library </h3><p>AI extracts fields from each report into a schema defined to reflect common audit report information and it’s saved to a database.</p><p>This shifts PDFs from “files to hunt for and sift through” to a easily searchable reference library you can actually use for <strong>audit planning</strong>, <strong>policy updates</strong>, <strong>risk assessment</strong>, and more.</p><h3>About the Tool</h3><p>Medicaid Audit Intelligence is a web based tool that presents the extracted data from audits of the Medicaid program with links to the source report. You can selected reports through the <strong>dashboard map</strong> or search/filter reports on <strong>keywords, agencies, or year published</strong>.</p><p>At this point, the tool is still under construction, there could be errors in the AI output and some variation in the names of the entities extracted.</p><p><em>If you work with Medicaid oversight (or similar document-heavy domains), I’d love your feedback and ideas for the next iteration.</em></p><p></p><figure><img data-media-urn="urn:li:digitalmediaAsset:D4E12AQH_s079rl5dXw" src="https://media.licdn.com/dms/image/v2/D4E12AQH_s079rl5dXw/article-inline_image-shrink_1500_2232/B4EZjKY2qxHoAU-/0/1755742170645?e=1767225600&amp;v=beta&amp;t=61FG31hQkW9l5sFE5xXns8oDt1MmGXYIB91Qx_GIdo8"><figcaption></figcaption></figure><p></p></div>
+  <div><p>Most orgs don’t have a knowledge problem—they have a structure problem. Turning scattered PDFs, emails, and slides into a structured reference library is the key to turning piles of files into useful data.</p><p>PDFs, emails, and slides are where truth lives but these files are most often scattered around in shared drives, too overwhelming to explore and only useful if you know where to look.</p><h3>Real-World Use Case: Medicaid Audit Reports</h3><p>I built a web tool that compiles, extracts, and indexes one domain: <strong>Medicaid audit reports</strong> across the U.S. Although these reports share common elements, like <strong>objectives, scope, conclusions, findings, recommendations</strong>, every publisher formats them differently. That variation makes reading slow and comparison harder.</p><p>Check it out here: <a href="https://medicaidaudit.org" target="_blank">https://medicaidaudit.org</a></p><h3>The core idea: AI → Structure → Library </h3><p>AI extracts fields from each report into a schema defined to reflect common audit report information and it’s saved to a database.</p><p>This shifts PDFs from “files to hunt for and sift through” to a easily searchable reference library you can actually use for <strong>audit planning</strong>, <strong>policy updates</strong>, <strong>risk assessment</strong>, and more.</p><h3>About the Tool</h3><p>Medicaid Audit Intelligence is a web based tool that presents the extracted data from audits of the Medicaid program with links to the source report. You can selected reports through the <strong>dashboard map</strong> or search/filter reports on <strong>keywords, agencies, or year published</strong>.</p><p>At this point, the tool is still under construction, there could be errors in the AI output and some variation in the names of the entities extracted.</p><p><em>If you work with Medicaid oversight (or similar document-heavy domains), I’d love your feedback and ideas for the next iteration.</em></p><p></p><figure><img src="images/aiandstructure2.png" alt="Medicaid Audit Intelligence dashboard and map" /><figcaption></figcaption></figure><p></p></div>
 </body>
 </html>

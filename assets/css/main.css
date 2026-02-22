@@ -188,16 +188,17 @@ main h1 {
   margin-bottom: 1rem;
 }
 
-ul[style*="list-style:none"] {
+.article-list {
   list-style: none;
   padding: 0;
+  margin: 2rem 0 0;
 }
 
-ul[style*="list-style:none"] > li {
+.article-list > li {
   margin: 0 0 0.8rem 0;
 }
 
-ul[style*="list-style:none"] a {
+.article-list a {
   color: var(--accent-color);
   text-decoration: none;
   font-family: var(--font-mono);
@@ -205,7 +206,7 @@ ul[style*="list-style:none"] a {
   transition: text-decoration 0.2s;
 }
 
-ul[style*="list-style:none"] a:hover {
+.article-list a:hover {
   text-decoration: underline;
 }
 
