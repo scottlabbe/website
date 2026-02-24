@@ -1,6 +1,7 @@
 ---
 title: Building a Searchable Library of Medicaid Audit Reports with AI
 date: 2026-02-10
+summary: Case study on building an AI-powered workflow that discovers, extracts, and organizes Medicaid audit findings into a searchable research library.
 status: published
 ---
 

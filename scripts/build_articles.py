@@ -16,12 +16,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ARTICLES_DIR = ROOT / "articles"
+SITE_NAME = "Scott Labbe"
+TITLE_SEPARATOR = " | "
 
 FENCE_RE = re.compile(r"^```([\w+-]*)\s*$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 UL_RE = re.compile(r"^\s*[-*]\s+(.+?)\s*$")
 OL_RE = re.compile(r"^\s*\d+\.\s+(.+?)\s*$")
 FRONT_MATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*\n?", re.DOTALL)
+CHAT_KEY_RE = re.compile(r"^([a-z_]+)\s*:\s*(.*)$", re.IGNORECASE)
 
 
 def parse_front_matter(text: str) -> tuple[dict[str, str], str]:
@@ -99,6 +102,82 @@ def render_inlines(raw: str) -> str:
     return escaped
 
 
+def parse_chat_block(lines: list[str]) -> dict[str, str] | None:
+    fields: dict[str, str] = {}
+    current_key: str | None = None
+    allowed = {"user", "model", "image", "user_label", "model_label"}
+
+    for raw in lines:
+        line = raw.rstrip()
+        if not line.strip():
+            if current_key and current_key in fields and current_key != "image":
+                fields[current_key] += "\n"
+            continue
+
+        if raw.startswith("  ") and current_key:
+            continuation = raw[2:].rstrip()
+            if continuation:
+                if fields[current_key]:
+                    fields[current_key] += f"\n{continuation}"
+                else:
+                    fields[current_key] = continuation
+            continue
+
+        match = CHAT_KEY_RE.match(line.strip())
+        if not match:
+            return None
+
+        key = match.group(1).lower()
+        value = match.group(2).strip()
+        if key in allowed:
+            fields[key] = value
+            current_key = key
+        else:
+            current_key = None
+
+    if not fields.get("user") or not fields.get("model"):
+        return None
+    return fields
+
+
+def render_chat_text(raw: str) -> str:
+    parts = [p.strip() for p in re.split(r"\n\s*\n", raw.strip()) if p.strip()]
+    if not parts:
+        return ""
+    return "".join(f"<p>{render_inlines(part.replace(chr(10), ' ').strip())}</p>" for part in parts)
+
+
+def render_chat_block(fields: dict[str, str]) -> str:
+    user_html = render_chat_text(fields["user"])
+    model_html = render_chat_text(fields["model"])
+    user_label = html.escape(fields.get("user_label", "User").strip() or "User")
+    model_label = html.escape(fields.get("model_label", "Assistant").strip() or "Assistant")
+    image_src = fields.get("image", "").strip()
+    image_html = ""
+    if image_src:
+        image_html = (
+            f'\n      <img src="{html.escape(image_src, quote=True)}" '
+            'alt="Model response image" class="chat-image" loading="lazy" />'
+        )
+
+    return (
+        '<section class="chat-example">\n'
+        '  <div class="chat-row chat-row-user">\n'
+        '    <div class="chat-bubble chat-bubble-user">\n'
+        f'      <p class="chat-label">{user_label}</p>\n'
+        f'{user_html}\n'
+        '    </div>\n'
+        "  </div>\n"
+        '  <div class="chat-row chat-row-model">\n'
+        '    <div class="chat-bubble chat-bubble-model">\n'
+        f'      <p class="chat-label">{model_label}</p>\n'
+        f'{model_html}{image_html}\n'
+        '    </div>\n'
+        "  </div>\n"
+        "</section>"
+    )
+
+
 def render_markdown(md_text: str) -> str:
     lines = md_text.splitlines()
     out: list[str] = []
@@ -113,7 +192,11 @@ def render_markdown(md_text: str) -> str:
     def flush_para() -> None:
         nonlocal para
         if para:
-            out.append(f"<p>{render_inlines(' '.join(para).strip())}</p>")
+            paragraph = " ".join(para).strip()
+            if re.fullmatch(r"(?:!\[[^\]]*\]\([^)]+\)\s*){2}", paragraph):
+                out.append(f'<p class="image-pair">{render_inlines(paragraph)}</p>')
+            else:
+                out.append(f"<p>{render_inlines(paragraph)}</p>")
             para = []
 
     def close_lists() -> None:
@@ -138,9 +221,17 @@ def render_markdown(md_text: str) -> str:
             close_lists()
             close_blockquote()
             if in_code:
-                lang_attr = f' class="language-{code_lang}"' if code_lang else ""
                 block = "\n".join(code)
-                out.append(f"<pre><code{lang_attr}>{html.escape(block)}</code></pre>")
+                if code_lang.lower() == "chat":
+                    chat_fields = parse_chat_block(code)
+                    if chat_fields:
+                        out.append(render_chat_block(chat_fields))
+                    else:
+                        lang_attr = f' class="language-{code_lang}"' if code_lang else ""
+                        out.append(f"<pre><code{lang_attr}>{html.escape(block)}</code></pre>")
+                else:
+                    lang_attr = f' class="language-{code_lang}"' if code_lang else ""
+                    out.append(f"<pre><code{lang_attr}>{html.escape(block)}</code></pre>")
                 code = []
                 code_lang = ""
                 in_code = False
@@ -239,14 +330,91 @@ def to_plain_text(html_fragment: str) -> str:
     return text
 
 
-def summarize(meta: dict[str, str], article_html: str) -> str:
-    raw = meta.get("summary", "").strip()
+def first_paragraph_text(html_fragment: str) -> str:
+    m = re.search(r"<p\b[^>]*>(.*?)</p>", html_fragment, flags=re.IGNORECASE | re.DOTALL)
+    if not m:
+        return ""
+    return normalize_summary(to_plain_text(m.group(1)))
+
+
+def normalize_summary(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip(" \n\t\r-")
+
+
+def finalize_summary(text: str) -> str:
+    text = normalize_summary(text).rstrip(" ,;:-")
+    if text and text[-1] not in ".!?":
+        text += "."
+    return text
+
+
+def truncate_for_meta(text: str, max_len: int = 160) -> str:
+    text = normalize_summary(text)
+    if len(text) <= max_len:
+        return finalize_summary(text)
+    sentence_end = text.rfind(". ", 100, max_len + 1)
+    if sentence_end != -1:
+        return finalize_summary(text[: sentence_end + 1])
+    clipped = text[:max_len].rsplit(" ", 1)[0].rstrip(" ,;:-")
+    return finalize_summary(clipped)
+
+
+def sentence_based_summary(text: str, max_len: int = 160) -> str:
+    parts = [p.strip() for p in re.split(r"(?<=[.!?])\s+", text) if p.strip()]
+    if not parts:
+        return ""
+    chosen: list[str] = []
+    for part in parts:
+        candidate = " ".join(chosen + [part]).strip()
+        if len(candidate) <= max_len:
+            chosen.append(part)
+        else:
+            break
+    combined = " ".join(chosen).strip()
+    if len(combined) >= 90:
+        return finalize_summary(combined)
+    first = parts[0]
+    if 70 <= len(first) <= max_len:
+        return finalize_summary(first)
+    return ""
+
+
+def fallback_summary(title: str) -> str:
+    _ = title
+    base = (
+        "Practical AI automation insights from Scott Labbe on audit workflows, "
+        "data extraction, and government program operations."
+    )
+    return truncate_for_meta(base)
+
+
+def excerpt_summary(text: str, max_words: int = 24) -> str:
+    words = [w for w in text.split() if w]
+    if not words:
+        return ""
+    excerpt = " ".join(words[:max_words])
+    if excerpt and excerpt[-1] not in ".!?":
+        excerpt += "."
+    return truncate_for_meta(excerpt)
+
+
+def summarize(meta: dict[str, str], article_html: str, title: str) -> str:
+    raw = normalize_summary(meta.get("summary", ""))
     if raw:
-        return raw[:160]
-    plain = to_plain_text(article_html)
-    if len(plain) <= 160:
-        return plain
-    return plain[:157].rsplit(" ", 1)[0] + "..."
+        candidate = sentence_based_summary(raw) or truncate_for_meta(raw)
+        return candidate if len(candidate) >= 80 else fallback_summary(title)
+    candidate_source = first_paragraph_text(article_html) or normalize_summary(to_plain_text(article_html))
+    plain = normalize_summary(candidate_source)
+    if not plain:
+        return fallback_summary(title)
+    return sentence_based_summary(plain) or excerpt_summary(plain) or fallback_summary(title)
+
+
+def format_page_title(title: str) -> str:
+    clean = re.sub(r"\s+", " ", title).strip()
+    if SITE_NAME.lower() in clean.lower():
+        return clean
+    return f"{clean}{TITLE_SEPARATOR}{SITE_NAME}"
 
 
 def article_template(
@@ -284,7 +452,7 @@ def article_template(
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{html.escape(title)}</title>
+  <title>{html.escape(format_page_title(title))}</title>
   <meta name="description" content="{html.escape(summary, quote=True)}" />
   <link rel="canonical" href="{canonical}" />
   <meta name="article:published" content="{pub_display}" />
@@ -380,6 +548,81 @@ def article_template(
       border-top: 1px solid rgba(0,0,0,0.2);
       margin: 1.4rem 0;
     }}
+    .chat-example {{
+      border: 1px solid rgba(45, 93, 75, 0.22);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.55);
+      padding: 1rem;
+      margin: 1.2rem 0;
+    }}
+    .chat-row {{
+      display: flex;
+      width: 100%;
+      margin: 0.55rem 0;
+    }}
+    .chat-row-user {{
+      justify-content: flex-end;
+    }}
+    .chat-row-model {{
+      justify-content: flex-start;
+    }}
+    .chat-bubble {{
+      max-width: min(86%, 660px);
+      border-radius: 12px;
+      padding: 0.8rem 0.9rem;
+      font-size: 0.96rem;
+      line-height: 1.6;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    }}
+    .chat-bubble p {{
+      margin: 0 0 0.6rem;
+    }}
+    .chat-bubble p:last-child {{
+      margin-bottom: 0;
+    }}
+    .chat-label {{
+      margin: 0 0 0.45rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      color: rgba(0,0,0,0.68);
+      text-transform: uppercase;
+    }}
+    .chat-bubble-user {{
+      background: #f3ecdc;
+      border: 1px solid rgba(0,0,0,0.1);
+    }}
+    .chat-bubble-model {{
+      background: #e7f1ec;
+      border: 1px solid rgba(45, 93, 75, 0.28);
+    }}
+    .chat-image {{
+      margin-top: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.12);
+    }}
+    p.image-pair {{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      align-items: start;
+    }}
+    p.image-pair img {{
+      margin: 0;
+      max-height: 360px;
+      object-fit: cover;
+    }}
+    @media (max-width: 640px) {{
+      .chat-example {{
+        padding: 0.75rem;
+      }}
+      .chat-bubble {{
+        max-width: 100%;
+      }}
+      p.image-pair {{
+        grid-template-columns: 1fr;
+      }}
+    }}
   </style>
 </head>
 <body>
@@ -407,7 +650,7 @@ def build_one(md_path: Path) -> str:
     published = parse_date(meta, md_path)
     slug = md_path.parent.name
     rendered = render_markdown(content)
-    summary = summarize(meta=meta, article_html=rendered)
+    summary = summarize(meta=meta, article_html=rendered, title=title)
     html_text = article_template(
         title=title,
         published=published,

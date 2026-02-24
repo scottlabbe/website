@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Building a Searchable Library of Medicaid Audit Reports with AI</title>
-  <meta name="description" content="A case study on automating document discovery and extraction for government auditors The Problem There are thousands of Medicaid audit reports published..." />
+  <title>Building a Searchable Library of Medicaid Audit Reports with AI | Scott Labbe</title>
+  <meta name="description" content="Case study on building an AI-powered workflow that discovers, extracts, and organizes Medicaid audit findings into a searchable research library." />
   <link rel="canonical" href="https://scottlabbe.me/articles/medicaid-intelligence-case-study/" />
   <meta name="article:published" content="2026-02-10" />
   <meta name="article:status" content="published" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Building a Searchable Library of Medicaid Audit Reports with AI" />
-  <meta property="og:description" content="A case study on automating document discovery and extraction for government auditors The Problem There are thousands of Medicaid audit reports published..." />
+  <meta property="og:description" content="Case study on building an AI-powered workflow that discovers, extracts, and organizes Medicaid audit findings into a searchable research library." />
   <meta property="og:url" content="https://scottlabbe.me/articles/medicaid-intelligence-case-study/" />
   <meta property="og:site_name" content="Scott Labbe" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Building a Searchable Library of Medicaid Audit Reports with AI" />
-  <meta name="twitter:description" content="A case study on automating document discovery and extraction for government auditors The Problem There are thousands of Medicaid audit reports published..." />
+  <meta name="twitter:description" content="Case study on building an AI-powered workflow that discovers, extracts, and organizes Medicaid audit findings into a searchable research library." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/main.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building a Searchable Library of Medicaid Audit Reports with AI", "description": "A case study on automating document discovery and extraction for government auditors The Problem There are thousands of Medicaid audit reports published...", "author": {"@type": "Person", "name": "Scott Labbe"}, "datePublished": "2026-02-10", "dateModified": "2026-02-10", "mainEntityOfPage": "https://scottlabbe.me/articles/medicaid-intelligence-case-study/", "url": "https://scottlabbe.me/articles/medicaid-intelligence-case-study/", "publisher": {"@type": "Person", "name": "Scott Labbe"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building a Searchable Library of Medicaid Audit Reports with AI", "description": "Case study on building an AI-powered workflow that discovers, extracts, and organizes Medicaid audit findings into a searchable research library.", "author": {"@type": "Person", "name": "Scott Labbe"}, "datePublished": "2026-02-10", "dateModified": "2026-02-10", "mainEntityOfPage": "https://scottlabbe.me/articles/medicaid-intelligence-case-study/", "url": "https://scottlabbe.me/articles/medicaid-intelligence-case-study/", "publisher": {"@type": "Person", "name": "Scott Labbe"}}</script>
   <style>
     body {
       background-color: #FDF5E6;
@@ -98,6 +98,81 @@
       border: 0;
       border-top: 1px solid rgba(0,0,0,0.2);
       margin: 1.4rem 0;
+    }
+    .chat-example {
+      border: 1px solid rgba(45, 93, 75, 0.22);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.55);
+      padding: 1rem;
+      margin: 1.2rem 0;
+    }
+    .chat-row {
+      display: flex;
+      width: 100%;
+      margin: 0.55rem 0;
+    }
+    .chat-row-user {
+      justify-content: flex-end;
+    }
+    .chat-row-model {
+      justify-content: flex-start;
+    }
+    .chat-bubble {
+      max-width: min(86%, 660px);
+      border-radius: 12px;
+      padding: 0.8rem 0.9rem;
+      font-size: 0.96rem;
+      line-height: 1.6;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    }
+    .chat-bubble p {
+      margin: 0 0 0.6rem;
+    }
+    .chat-bubble p:last-child {
+      margin-bottom: 0;
+    }
+    .chat-label {
+      margin: 0 0 0.45rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      color: rgba(0,0,0,0.68);
+      text-transform: uppercase;
+    }
+    .chat-bubble-user {
+      background: #f3ecdc;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .chat-bubble-model {
+      background: #e7f1ec;
+      border: 1px solid rgba(45, 93, 75, 0.28);
+    }
+    .chat-image {
+      margin-top: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+    p.image-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      align-items: start;
+    }
+    p.image-pair img {
+      margin: 0;
+      max-height: 360px;
+      object-fit: cover;
+    }
+    @media (max-width: 640px) {
+      .chat-example {
+        padding: 0.75rem;
+      }
+      .chat-bubble {
+        max-width: 100%;
+      }
+      p.image-pair {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>

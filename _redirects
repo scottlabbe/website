@@ -1,6 +1,4 @@
 # Redirects for Cloudflare Pages
-http://scottlabbe.me/*  https://scottlabbe.me/:splat  301
-http://www.scottlabbe.me/*  https://scottlabbe.me/:splat  301
 /about    /   301
 /about/   /   301
 /index.html /  301
@@ -21,3 +19,5 @@ http://www.scottlabbe.me/*  https://scottlabbe.me/:splat  301
 /articles/data/Articles/beyond-summarize-crafting-simple-effective-ai-prompt-audit-scott-tjyre.html  /articles/beyond-summarize/  301
 /articles/data/Articles/from-pdf-insight-leveraging-ai-streamline-audit-scott-labbe-cpa-gjgve.html  /articles/from-pdf-to-insight/  301
 /articles/medicaid_intelligence_case_study/  /articles/medicaid-intelligence-case-study/  301
+http://scottlabbe.me/*  https://scottlabbe.me/:splat  301
+http://www.scottlabbe.me/*  https://scottlabbe.me/:splat  301
