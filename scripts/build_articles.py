@@ -105,7 +105,15 @@ def render_inlines(raw: str) -> str:
 def parse_chat_block(lines: list[str]) -> dict[str, str] | None:
     fields: dict[str, str] = {}
     current_key: str | None = None
-    allowed = {"user", "model", "image", "user_label", "model_label"}
+    allowed = {
+        "user",
+        "model",
+        "image",
+        "user_image",
+        "model_image",
+        "user_label",
+        "model_label",
+    }
 
     for raw in lines:
         line = raw.rstrip()
@@ -152,11 +160,20 @@ def render_chat_block(fields: dict[str, str]) -> str:
     model_html = render_chat_text(fields["model"])
     user_label = html.escape(fields.get("user_label", "User").strip() or "User")
     model_label = html.escape(fields.get("model_label", "Assistant").strip() or "Assistant")
-    image_src = fields.get("image", "").strip()
-    image_html = ""
-    if image_src:
-        image_html = (
-            f'\n      <img src="{html.escape(image_src, quote=True)}" '
+    user_image_src = fields.get("user_image", "").strip()
+    model_image_src = fields.get("model_image", "").strip() or fields.get("image", "").strip()
+
+    user_image_html = ""
+    if user_image_src:
+        user_image_html = (
+            f'\n      <img src="{html.escape(user_image_src, quote=True)}" '
+            'alt="User uploaded image" class="chat-image" loading="lazy" />'
+        )
+
+    model_image_html = ""
+    if model_image_src:
+        model_image_html = (
+            f'\n      <img src="{html.escape(model_image_src, quote=True)}" '
             'alt="Model response image" class="chat-image" loading="lazy" />'
         )
 
@@ -165,13 +182,13 @@ def render_chat_block(fields: dict[str, str]) -> str:
         '  <div class="chat-row chat-row-user">\n'
         '    <div class="chat-bubble chat-bubble-user">\n'
         f'      <p class="chat-label">{user_label}</p>\n'
-        f'{user_html}\n'
+        f'{user_html}{user_image_html}\n'
         '    </div>\n'
         "  </div>\n"
         '  <div class="chat-row chat-row-model">\n'
         '    <div class="chat-bubble chat-bubble-model">\n'
         f'      <p class="chat-label">{model_label}</p>\n'
-        f'{model_html}{image_html}\n'
+        f'{model_html}{model_image_html}\n'
         '    </div>\n'
         "  </div>\n"
         "</section>"

@@ -75,7 +75,7 @@ user_label: User
 model_label: ChatGPT 5.2 Thinking
 user: Can you generate a picture with some of these ideas?
 model: Here is a rough concept image based on your notes.
-image: ./images/image4.png
+model_image: ./images/image4.png
 ```
 
 From the image generated, the ideas that stuck with me were the patches and the wrench with a crown. The necklace looked more animated, but I mainly needed the overall direction.
@@ -96,12 +96,13 @@ Once I had the designs I wanted, I traced outlines onto paper, transferred marks
 
 ## Example #5 - Refining Ideas
 
-After painting on the gold chain, I thought it needed a medallion to help it pop.
+After painting on the gold chain, I thought it needed a medallion to help it pop a little more.
 
 ```chat
 user_label: User
 model_label: Google Nano Banana Pro
 user: Could you add a golden medallion with the words “ROYAL SERVICE” in all caps to the necklace?
+user_image: ./images/uploaded_image.jpg
 model: Updated concept image with medallion placement.
 image: ./images/Gemini_Generated_Image_3872y93872y93872.png
 ```
