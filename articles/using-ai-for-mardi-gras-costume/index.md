@@ -22,15 +22,15 @@ Instead of starting with a fully formed concept, I used ChatGPT like a design pa
 
 This article is going to walk through a few examples of the queries and model responses I thought made the biggest impact.
 
-Here's what I want you to take away from this: this costume is not winning any awards on Mardi Gras Day. It's not even close to the most impressive or wildest thing walking around the French Quarter. But I went from "I have an old jumpsuit and want to use gold paint" to a finished, intentional-looking costume in a few weeks and I could not have done it at that level without AI. Not because any single step was impossible on my own, but because AI compressed the whole process. Materials research, concept directions, mockups, stencil-ready artwork, painting technique, it kept the full context of my project across every step and let me iterate fast enough to actually get it done. And honestly, after doing the physical work of painting, cutting, and heat-setting, I'm kind of amazed I finished at all.
+Here's what I want folks to take away from this: this costume is not winning any awards on Mardi Gras Day. It's not even close to the most impressive or wildest thing walking around the French Quarter. But I went from "I have an old jumpsuit and want to use gold paint" to a finished, intentional-looking costume in a few weeks and I could not have done it at that level without AI. Not because any single step was impossible on my own, but because AI compressed the whole process. Materials research, concept directions, mockups, stencil-ready artwork, painting technique, it kept the full context of my project across every step and let me progress fast enough to actually get it done. And honestly, after doing the physical work of painting, cutting, and heat-setting, I'm kind of amazed I finished at all.
 
 ## Example #1 - What kind of Materials Will I Need?
 
-As someone who tries to encourage people to use AI tools, one piece of advice I emphasize is that it's important to bring the right kind of direction or constraint to the AI tool to get the best results for your situation.
+As someone who tries to encourage people to use AI tools, one piece of advice I emphasize is that it's important to bring some kind of direction or constraint to the AI tool to get the best results for your situation.
 
 I had an old mechanic jumpsuit from a Halloween costume from years ago and I knew I wanted to use gold paint in the costume. That meant the gold paint and any other colors needed to work on dark fabric along with whatever kind of fabric the jumpsuit was made out of.
 
-I enabled internet search for this query, and it ended up searching through over 20 websites including product descriptions, reddit threads, essays, and other sites that related to the query.
+I enabled internet search for this query, uploaded a picture of the tag, and it ended up searching through over 20 websites including product descriptions, reddit threads, essays, and other sites that related to the query.
 
 ```chat
 user_label: User
@@ -127,7 +127,7 @@ model: Good instinct. On dark blue, a white underbase is how you get bright and 
 
 ## Example #7 - Links to the Supplies
 
-To get started on construction, I asked it to pull together purchase links.
+  To get started on construction, I asked it to pull together purchase links.
 
 ```chat
 user_label: User
@@ -147,8 +147,6 @@ model: For your 65% poly / 35% cotton jumpsuit, I’d buy Jacquard paints for th
 ## Final Result
 
 AI helped me find the right paint for a synthetic and cotton blend, suggested concepts that actually fit the garment I had, generated stencil art I could trace, and walked me through layering techniques on dark fabric. All of that probably saved me several days and nights of research, sketches, and false starts.
-
-Of course, painting gold chain links freehand on a jumpsuit at midnight, waiting for coats to dry, messing up stencils and having to improvise, that part was all me. And it ended up being harder than I expected.
 
 What AI actually gave me was a realistic shot at finishing something that was better than I could have created on my own. It shortened the distance between "vague idea" and "okay, I know exactly what to do and I have everything I need." For a holiday where the whole point is making something yourself, that felt like the right kind of help.
 
