@@ -77,7 +77,7 @@ This also helped with context management. Each step receives only the files it n
 
 Each agent run produces a file structure:
 
-![RunFilesystem](./images/filesystem.png)
+<img src="./images/filesystem.png" alt="RunFilesystem" style="width:min(100%,420px);height:auto;display:block;margin:1rem auto;" />
 
 ### Models can do useful SQL work when the lane is narrow
 
