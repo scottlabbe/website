@@ -25,6 +25,7 @@ UL_RE = re.compile(r"^\s*[-*]\s+(.+?)\s*$")
 OL_RE = re.compile(r"^\s*\d+\.\s+(.+?)\s*$")
 FRONT_MATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*\n?", re.DOTALL)
 CHAT_KEY_RE = re.compile(r"^([a-z_]+)\s*:\s*(.*)$", re.IGNORECASE)
+RAW_IMG_RE = re.compile(r"^<img\b[^>]*>\s*$", re.IGNORECASE)
 
 
 def parse_front_matter(text: str) -> tuple[dict[str, str], str]:
@@ -276,6 +277,13 @@ def render_markdown(md_text: str) -> str:
             close_lists()
             close_blockquote()
             out.append("<hr />")
+            continue
+
+        if RAW_IMG_RE.match(stripped):
+            flush_para()
+            close_lists()
+            close_blockquote()
+            out.append(stripped)
             continue
 
         heading = HEADING_RE.match(line)
