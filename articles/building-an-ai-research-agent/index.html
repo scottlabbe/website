@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Building an AI Research Agent for Medicaid Audit Reports | Scott Labbe</title>
+  <meta name="description" content="I built an AI research agent to automate the process of researching and analyzing patterns across a large set of Medicaid audit reports I." />
+  <link rel="canonical" href="https://scottlabbe.me/articles/building-an-ai-research-agent/" />
+  <meta name="article:published" content="2026-04-05" />
+  <meta name="article:status" content="published" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Building an AI Research Agent for Medicaid Audit Reports" />
+  <meta property="og:description" content="I built an AI research agent to automate the process of researching and analyzing patterns across a large set of Medicaid audit reports I." />
+  <meta property="og:url" content="https://scottlabbe.me/articles/building-an-ai-research-agent/" />
+  <meta property="og:site_name" content="Scott Labbe" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Building an AI Research Agent for Medicaid Audit Reports" />
+  <meta name="twitter:description" content="I built an AI research agent to automate the process of researching and analyzing patterns across a large set of Medicaid audit reports I." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building an AI Research Agent for Medicaid Audit Reports", "description": "I built an AI research agent to automate the process of researching and analyzing patterns across a large set of Medicaid audit reports I.", "author": {"@type": "Person", "name": "Scott Labbe"}, "datePublished": "2026-04-05", "dateModified": "2026-04-05", "mainEntityOfPage": "https://scottlabbe.me/articles/building-an-ai-research-agent/", "url": "https://scottlabbe.me/articles/building-an-ai-research-agent/", "publisher": {"@type": "Person", "name": "Scott Labbe"}}</script>
+  <style>
+    body {
+      background-color: #FDF5E6;
+      color: #333333;
+      font-family: 'Libre Baskerville', serif;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Space Mono', monospace;
+      color: #333333;
+      line-height: 1.3;
+      margin: 1.2rem 0 0.6rem;
+    }
+    h1 { font-size: 2rem; margin-top: 0; }
+    .site-article-nav {
+      margin: 0 0 1.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .site-article-nav a {
+      color: #2D5D4B;
+      text-decoration: none;
+    }
+    .site-article-nav a:hover {
+      text-decoration: underline;
+    }
+    p { margin: 0.9rem 0; }
+    .published {
+      color: rgba(0,0,0,0.6);
+      font-size: 0.9rem;
+      margin-bottom: 1.4rem;
+    }
+    a { color: #2D5D4B; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { margin: 0.9rem 0; padding-left: 1.4rem; }
+    li { margin: 0.3rem 0; }
+    code {
+      background: rgba(0, 0, 0, 0.06);
+      padding: 0.08rem 0.28rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    pre {
+      background: rgba(0, 0, 0, 0.06);
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 8px;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+    blockquote {
+      border-left: 3px solid #2D5D4B;
+      margin: 1.1rem 0;
+      padding-left: 1rem;
+      color: rgba(0,0,0,0.85);
+    }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 1rem 0;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid rgba(0,0,0,0.2);
+      margin: 1.4rem 0;
+    }
+    .chat-example {
+      border: 1px solid rgba(45, 93, 75, 0.22);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.55);
+      padding: 1rem;
+      margin: 1.2rem 0;
+    }
+    .chat-row {
+      display: flex;
+      width: 100%;
+      margin: 0.55rem 0;
+    }
+    .chat-row-user {
+      justify-content: flex-end;
+    }
+    .chat-row-model {
+      justify-content: flex-start;
+    }
+    .chat-bubble {
+      max-width: min(86%, 660px);
+      border-radius: 12px;
+      padding: 0.8rem 0.9rem;
+      font-size: 0.96rem;
+      line-height: 1.6;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    }
+    .chat-bubble p {
+      margin: 0 0 0.6rem;
+    }
+    .chat-bubble p:last-child {
+      margin-bottom: 0;
+    }
+    .chat-label {
+      margin: 0 0 0.45rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      color: rgba(0,0,0,0.68);
+      text-transform: uppercase;
+    }
+    .chat-bubble-user {
+      background: #f3ecdc;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .chat-bubble-model {
+      background: #e7f1ec;
+      border: 1px solid rgba(45, 93, 75, 0.28);
+    }
+    .chat-image {
+      margin-top: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+    p.image-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      align-items: start;
+    }
+    p.image-pair img {
+      margin: 0;
+      max-height: 360px;
+      object-fit: cover;
+    }
+    @media (max-width: 640px) {
+      .chat-example {
+        padding: 0.75rem;
+      }
+      .chat-bubble {
+        max-width: 100%;
+      }
+      p.image-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-article-nav" aria-label="Article navigation">
+    <a href="/">Home</a>
+    <a href="/articles/">Articles</a>
+    <a href="/videos/">Videos</a>
+  </nav>
+  <h1>Building an AI Research Agent for Medicaid Audit Reports</h1>
+  <p class="published">Published on 2026-04-05</p>
+  <article>
+<p>I built an AI research agent to automate the process of researching and analyzing patterns across a large set of Medicaid audit reports I have compiled at medicaidintelligence.com.</p>
+<p>This was actually a much harder problem than building the initial AI summary pipeline and database. It was harder because research is full of open-ended questions and problems. A research process includes taking a broad topic, narrowing the right set of reports, pulling relevant evidence, spotting recurring themes, and turning that research into a useful written report.</p>
+<p>That kind of work is difficult to do well with a simple chatbot prompt. It requires planning, structured retrieval, focused analysis, and some way to verify that the final output is actually supported by the evidence.</p>
+<p>To explore that problem, I built a workflow-based agent that can break a research question into steps, query a report database, analyze the results, draft a report, and check whether the final claims are grounded in the underlying evidence.</p>
+<p><img src="./images/managed_care_report.png" alt="Report" /></p>
+<h2>What I mean by an AI agent</h2>
+<p>For this project, I think of an AI agent as a system built around a language model that can do more than generate text. It can plan, use tools, produce supporting work or input for additional steps, and move through a structured process to complete a goal.</p>
+<p>In this case, the goal was to carry out a research workflow and produce an evidence-backed report just from data included in the audit report database.</p>
+<p>After building the AI summary pipeline I had a database of keywords extracted from more than 100 Medicaid audit reports. That gave me a foundation to experiment with, I could use LLMs to research those keyword topics and surface what kinds of issues keep showing up.</p>
+<p>I worked with OpenAI’s Codex model for the last few weeks as I explored and tested various concepts and agent setups. I finally have a working prototype that I’m pretty happy with.</p>
+<p>Here’s the links to check out the reports:</p>
+<ul>
+<li><a href="https://www.medicaidintelligence.com/research/pharmacy-benefit-managers">Pharmacy Benefit Managers</a></li>
+<li><a href="https://www.medicaidintelligence.com/research/managed-care">Managed Care</a></li>
+</ul>
+<p>Here’s some of the code for the agent: <a href="https://github.com/scottlabbe/researchagent-public">GitHub Repo</a></p>
+<p>The public repository preserves the runner, prompts, contracts, and tests, but removes the live database adapter, sensitive SQL examples, and private corpus details:</p>
+<h2>How the workflow is structured</h2>
+<p>I found pretty quickly that this worked better as a sequence of narrow roles than as one general-purpose agent trying to do everything at once.</p>
+<p>Rather than asking one model to interpret the question, search the data, write SQL, analyze results, write a polished report, and verify its own claims all in one pass, I split the work into a handful of smaller, specialized steps.</p>
+<p>The agent is actually made up of five subagents with very specific roles in the research process. Here’s how it works at a high level:</p>
+<ol>
+<li>The user asks a question about information in the database.</li>
+<li><strong>Research Planner</strong> — creates tasks for other subagents to complete.</li>
+<li><strong>SQL Agent</strong> — writes and executes SQL queries to build a report corpus related to the topic.</li>
+<li><strong>Analyst</strong> — summarizes the research, groups themes, and makes observations.</li>
+<li><strong>Report Writer</strong> —  turns that analysis into a narrative report with canonical citations.</li>
+<li><strong>Evaluator</strong> — reviews the final report, verifies accuracy, citations, and can trigger a repair cycle.</li>
+</ol>
+<p>Here are examples of the key findings identified in each report, each headline is a collapsible section that reveals the details and research along with links to the specific audit reports referenced in the report.</p>
+<h3>Managed Care</h3>
+<p><img src="./images/managed_care_findings.png" alt="Managed Care Findings" /></p>
+<h3>Pharmacy Benefit Managers</h3>
+<p><img src="./images/pbm_findings.png" alt="PBM Findings" /></p>
+<h2>Lessons from building the agent</h2>
+<p>A few things stood out as I iterated on this system. Some of these are specific to this project, but most of them apply to agent design more broadly.</p>
+<h3>Break down the problem into manageable, intuitive pieces</h3>
+<p>The agent consists of five subagents with very specific roles and objectives. This follows the way I broke down the problem, and it closely mirrors the steps I would go through if I were researching and creating a report myself.</p>
+<p>A single general-purpose agent sounds simpler, but in practice it creates a few problems. The context gets crowded, the task becomes less defined, and it becomes harder to understand why the model produced a weak answer.</p>
+<p>Breaking the workflow into smaller roles made the system easier to guide and easier to review. Each step only needs the context that matters for its specific job. The planning step does not need the full reporting prompt. The SQL step does not need to worry about writing polished prose. The evaluator does not need to re-run the whole workflow.</p>
+<p>That separation made the outputs more reliable and made failures much easier to inspect.</p>
+<h3>A filesystem-backed workflow made the system auditable and easier to manage</h3>
+<p>One of the most useful design choices was making the filesystem the system of record, grounding it in simple files and folders. Instead of hiding everything inside one long conversation, the system writes out its intermediate work: the plan, the research tasks, the query outputs, the analysis notes, the report draft, and the evaluation results. Each run leaves behind a record of how the answer was produced.</p>
+<p>That made the workflow much easier to review and trust. If anything seems suspect in the final report, the reference can be traced back to the evidence bundle generated by the workflow, the analysis document from the previous step, and the SQL query results obtained from the database.</p>
+<p>This also helped with context management. Each step receives only the files it needs, instead of dragging along the entire history of the workflow. In practice, that made the system both cleaner and more reliable.</p>
+<p>Each agent run produces a file structure:</p>
+<p><img src="./images/filesystem.png" alt="RunFilesystem" /></p>
+<h3>Models can do useful SQL work when the lane is narrow</h3>
+<p>I expected SQL generation to be one of the hardest parts of the project, and early on it was. The model improved a lot once I stopped treating SQL generation as an open-ended coding task and started giving it a more defined environment.</p>
+<p>The biggest improvements came from providing the data schema, showing examples of the kinds of queries I actually wanted, and keeping the SQL agent focused on a narrow objective. I narrowed the lane for the model into a problem like “solve this kind of retrieval problem within known boundaries.”</p>
+<p>That was a good reminder that agent design is often about reducing ambiguity. The model did better when the task was constrained, the available tools were clear, and success looked concrete.</p>
+<h3>Building the foundation of research was the hardest problem to solve</h3>
+<p>The actual hardest problem to solve was helping the agent to define which reports belong in scope for the report. This is so important because if the body of research is too narrow, the analysis is incomplete. If it is too broad, the results become noisy and less useful. Either way, the evaluator subagent can't save a report built on an inadequate foundation.</p>
+<p>The model has to identify the right body of reports to study before it can analyze themes or write a referenced report. That defined corpus of reports then carries through the entire workflow:</p>
+<ul>
+<li>it defines which reports from the database are in scope for the report.</li>
+<li>it determines which findings and recommendations are retrieved.</li>
+<li>it gives the analyst a bounded evidence base to interpret.</li>
+<li>it sets the outer limits on what the final report can responsibly claim.</li>
+</ul>
+<p>The SQL examples and references I provided to the model were focused on defining the foundation of reports to analyze. Whether a model is doing the research or a human is doing the research, the steps will look very similar.</p>
+<h3>Examples from workflow steps</h3>
+<p>To give a sense of how the pieces fit together, here are a few tasks the planner agent created for the other agents to perform. Notice how each task is scoped to a specific task for the subagent to complete.</p>
+<pre><code class="language-json">{
+  &quot;task_id&quot;: &quot;task_001&quot;,
+  &quot;kind&quot;: &quot;corpus_scope&quot;,
+  &quot;role&quot;: &quot;sql_agent&quot;,
+  &quot;title&quot;: &quot;Identify PBM/pharmacy-related active reports&quot;,
+  &quot;description&quot;: &quot;Return a report-grain result set listing active, non-hidden audit reports that are about PBMs or pharmacy issues (using report keywords).&quot;
+}
+
+{
+  &quot;task_id&quot;: &quot;task_002&quot;,
+  &quot;kind&quot;: &quot;evidence_retrieval&quot;,
+  &quot;role&quot;: &quot;sql_agent&quot;,
+  &quot;title&quot;: &quot;Retrieve findings and linked recommendations for PBM/pharmacy reports&quot;,
+  &quot;description&quot;: &quot;For the reports returned by task_001, return one row per finding including recommendation context and report metadata.&quot;
+}
+
+{
+  &quot;task_id&quot;: &quot;task_004&quot;,
+  &quot;kind&quot;: &quot;report&quot;,
+  &quot;role&quot;: &quot;report_writer&quot;,
+  &quot;title&quot;: &quot;Consultant-style report: recurring PBM oversight findings and audit process targets&quot;,
+  &quot;description&quot;: &quot;Produce a consultant-style narrative report answering the user&#x27;s question, grounded to the analysis output and evidence, with prioritized audit processes and concrete audit tests.&quot;
+}</code></pre>
+<p>To give you a sense of the workflow the agent followed, here's the log of events that shows the exact workflow steps that the agent went through. As the agent worked through each task and created its own output for the next steps, it saved them as "artifacts" within the file system.</p>
+<p><img src="./images/run_log.png" alt="Run log" /></p>
+<h3>Models can improve their output with feedback</h3>
+<p>To take advantage of the model's ability to improve if given the right kind of feedback, the evaluator is a layer of the process that has the ability to spot issues and generate a repair cycle.</p>
+<p>The evaluator checks five specific dimensions defined in its prompt:</p>
+<ul>
+<li>Question coverage — does the report actually answer what was asked?</li>
+<li>Evidence grounding — are claims anchored in a body of evidence, or is the report stretching a single example into a broad generalization?</li>
+<li>Narrative quality — is it coherent and synthesized, not just a listing of database entries?</li>
+<li>Actionability — are recommendations concrete enough to guide real, useful follow-up?</li>
+<li>Residual risk — would you trust the report as-is or what is it missing?</li>
+</ul>
+<p>The evaluator can "fail" the report completion process and generate a report_revision task to tighten citations, grounding, or writing without reopening the whole workflow.</p>
+<p>Here's an example from an agent run where the evaluator determined the report citations need to be fixed:</p>
+<pre><code class="language-json">{
+  &quot;task_id&quot;: &quot;task_005&quot;,
+  &quot;kind&quot;: &quot;report_revision&quot;,
+  &quot;role&quot;: &quot;report_writer&quot;,
+  &quot;title&quot;: &quot;Revise the report&quot;,
+  &quot;description&quot;: &quot;Tighten the report using evaluator feedback without reopening retrieval or analysis.&quot;,
+  &quot;instructions&quot;: &quot;Revise the report to resolve report validation issues using the existing evidence base.\n\nIssues:\n- Sources section is missing canonical [Report N] entries.\n- Sources Referenced is missing body-cited report ids: 6, 7, 53, 65, 83\n\nRequested follow-ups:\n- Address advisory report-validation warnings where possible.\n- Keep canonical [Report N] citations consistent between body and sources.&quot;,
+}</code></pre>
+<h2>Closing thoughts</h2>
+<p>The clearest lesson I learned from this process was that to build a useful agent workflow to automate a research process, it really was about building a focused workflow with structure, constraints, and a clear trail of evidence.</p>
+<p>With the right kind of tools and context, it could move through a research process in a way that was reviewable and easier to trust and easier to improve. It really makes me wonder in what ways knowledge bases for organizations will be put to use in the future.</p>
+  </article>
+</body>
+</html>

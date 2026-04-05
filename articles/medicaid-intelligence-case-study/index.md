@@ -25,9 +25,9 @@ That's two days of professional time to answer a question like: *What have other
 
 ## The Solution
 
-Using AI tools like Replit for development and OpenAI LLMs for extraction, I built a system that automatically discovers, extracts, and organizes Medicaid audit findings from publicly available websites. The result is [medicaidaudit.org](https://medicaidaudit.org), a searchable library where you can filter reports by state, agency, year, or keyword, with everything linked back to the original source documents.
+Using AI tools like Replit for development and OpenAI LLMs for extraction, I built a system that automatically discovers, extracts, and organizes Medicaid audit findings from publicly available websites. The result is [medicaidintelligence](https://medicaidintelligence.com), a searchable library where you can filter reports by state, agency, year, or keyword, with everything linked back to the original source documents.
 
-The library currently contains **[111] reports** spanning **[5] years** from **[XX] agencies**. Each report is broken down into structured data: objectives, scope, findings, and recommendations, fields that auditors actually care about when planning engagements or assessing risk. It also includes LLM generated insights or take home points that I experimented with to explore how LLMs might think about building on the reported information. 
+The library currently contains **[111] reports** spanning **[5] years** from **[25] agencies**. Each report is broken down into structured data: objectives, scope, findings, and recommendations, fields that auditors actually care about when planning engagements or assessing risk. It also includes LLM generated insights or take home points that I experimented with to explore how LLMs might think about building on the reported information. 
 
 ![Search Interface](./images/homepage.png)
 
@@ -150,7 +150,7 @@ For someone starting a Medicaid engagement today, the question "What have others
 
 ## Try It Out
 
-You can explore the tool at [medicaidaudit.org](https://medicaidaudit.org).
+You can explore the tool at [medicaidintelligence](https://medicaidintelligence.com).
 
 The code for both the extraction pipeline and the frontend is available on GitHub:
 
