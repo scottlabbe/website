@@ -271,18 +271,10 @@
   &quot;title&quot;: &quot;Consultant-style report: recurring PBM oversight findings and audit process targets&quot;,
   &quot;description&quot;: &quot;Produce a consultant-style narrative report answering the user&#x27;s question, grounded to the analysis output and evidence, with prioritized audit processes and concrete audit tests.&quot;
 }</code></pre>
-<p>To give you a sense of the workflow the agent followed, here's the log of events that shows the exact workflow steps that the agent went through. As the agent worked through each task and created its own output for the next steps, it saved them as "artifacts" within the file system.</p>
+<p>To give you a sense of the workflow the agent followed, here's the log of events that shows the exact workflow steps that the agent went through after it received a question about a topic. As the agent worked through each task and created its own output for the next steps, it saved them as "artifacts" within the file system.</p>
 <p><img src="./images/run_log.png" alt="Run log" /></p>
 <h3>Models can improve their output with feedback</h3>
 <p>To take advantage of the model's ability to improve if given the right kind of feedback, the evaluator is a layer of the process that has the ability to spot issues and generate a repair cycle.</p>
-<p>The evaluator checks five specific dimensions defined in its prompt:</p>
-<ul>
-<li>Question coverage — does the report actually answer what was asked?</li>
-<li>Evidence grounding — are claims anchored in a body of evidence, or is the report stretching a single example into a broad generalization?</li>
-<li>Narrative quality — is it coherent and synthesized, not just a listing of database entries?</li>
-<li>Actionability — are recommendations concrete enough to guide real, useful follow-up?</li>
-<li>Residual risk — would you trust the report as-is or what is it missing?</li>
-</ul>
 <p>The evaluator can "fail" the report completion process and generate a report_revision task to tighten citations, grounding, or writing without reopening the whole workflow.</p>
 <p>Here's an example from an agent run where the evaluator determined the report citations need to be fixed:</p>
 <pre><code class="language-json">{
@@ -293,6 +285,14 @@
   &quot;description&quot;: &quot;Tighten the report using evaluator feedback without reopening retrieval or analysis.&quot;,
   &quot;instructions&quot;: &quot;Revise the report to resolve report validation issues using the existing evidence base.\n\nIssues:\n- Sources section is missing canonical [Report N] entries.\n- Sources Referenced is missing body-cited report ids: 6, 7, 53, 65, 83\n\nRequested follow-ups:\n- Address advisory report-validation warnings where possible.\n- Keep canonical [Report N] citations consistent between body and sources.&quot;,
 }</code></pre>
+<p>Right now, the evaluator mainly checks for report citation accuracy but I'll be expanding this loop to include things like:</p>
+<ul>
+<li>Question coverage — does the report actually answer what was asked?</li>
+<li>Evidence grounding — are claims anchored in a body of evidence, or is the report stretching a single example into a broad generalization?</li>
+<li>Narrative quality — is it coherent and synthesized, not just a listing of database entries?</li>
+<li>Actionability — are recommendations concrete enough to guide real, useful follow-up?</li>
+<li>Residual risk — would you trust the report as-is or what is it missing?</li>
+</ul>
 <h2>Closing thoughts</h2>
 <p>The clearest lesson I learned from this process was that to build a useful agent workflow to automate a research process, it really was about building a focused workflow with structure, constraints, and a clear trail of evidence.</p>
 <p>With the right kind of tools and context, it could move through a research process in a way that was reviewable and easier to trust and easier to improve. It really makes me wonder in what ways knowledge bases for organizations will be put to use in the future.</p>

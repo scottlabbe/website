@@ -128,7 +128,7 @@ To give a sense of how the pieces fit together, here are a few tasks the planner
   "description": "Produce a consultant-style narrative report answering the user's question, grounded to the analysis output and evidence, with prioritized audit processes and concrete audit tests."
 }
 ```
-To give you a sense of the workflow the agent followed, here's the log of events that shows the exact workflow steps that the agent went through. As the agent worked through each task and created its own output for the next steps, it saved them as "artifacts" within the file system. 
+To give you a sense of the workflow the agent followed, here's the log of events that shows the exact workflow steps that the agent went through after it received a question about a topic. As the agent worked through each task and created its own output for the next steps, it saved them as "artifacts" within the file system. 
 
 ![Run log](./images/run_log.png)
 
@@ -136,14 +136,6 @@ To give you a sense of the workflow the agent followed, here's the log of events
 ### Models can improve their output with feedback
 
 To take advantage of the model's ability to improve if given the right kind of feedback, the evaluator is a layer of the process that has the ability to spot issues and generate a repair cycle. 
-
-The evaluator checks five specific dimensions defined in its prompt:
-
-- Question coverage — does the report actually answer what was asked?
-- Evidence grounding — are claims anchored in a body of evidence, or is the report stretching a single example into a broad generalization?
-- Narrative quality — is it coherent and synthesized, not just a listing of database entries?
-- Actionability — are recommendations concrete enough to guide real, useful follow-up?
-- Residual risk — would you trust the report as-is or what is it missing?
 
 The evaluator can "fail" the report completion process and generate a report_revision task to tighten citations, grounding, or writing without reopening the whole workflow.
 
@@ -160,8 +152,18 @@ Here's an example from an agent run where the evaluator determined the report ci
 }
 ```
 
+Right now, the evaluator mainly checks for report citation accuracy but I'll be expanding this loop to include things like:
+
+- Question coverage — does the report actually answer what was asked?
+- Evidence grounding — are claims anchored in a body of evidence, or is the report stretching a single example into a broad generalization?
+- Narrative quality — is it coherent and synthesized, not just a listing of database entries?
+- Actionability — are recommendations concrete enough to guide real, useful follow-up?
+- Residual risk — would you trust the report as-is or what is it missing?
+
 ## Closing thoughts
 
 The clearest lesson I learned from this process was that to build a useful agent workflow to automate a research process, it really was about building a focused workflow with structure, constraints, and a clear trail of evidence. 
 
 With the right kind of tools and context, it could move through a research process in a way that was reviewable and easier to trust and easier to improve. It really makes me wonder in what ways knowledge bases for organizations will be put to use in the future. 
+
+
